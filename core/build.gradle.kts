@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
+apply {
+    from("../shared_dependencies.gradle")
+}
+
 android {
     namespace = "com.famandexpertapp1.core"
     compileSdk = 34
