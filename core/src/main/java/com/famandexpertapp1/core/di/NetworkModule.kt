@@ -23,7 +23,7 @@ class NetworkModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://api.igdb.com/v4/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
