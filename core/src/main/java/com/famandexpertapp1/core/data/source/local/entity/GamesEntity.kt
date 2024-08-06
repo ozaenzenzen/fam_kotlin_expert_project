@@ -131,7 +131,7 @@ data class GamesEntity(
     val category: Int,
 
     @ColumnInfo("involved_companies")
-    val involvedCompanies: List<Int?>? = null,
+    val involvedCompanies: List<Int?>,
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,
