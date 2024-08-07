@@ -1,10 +1,13 @@
 package com.famandexpertapp1.core.data.source.local.entity
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "franchise_table")
 data class FranchiseEntity (
     @PrimaryKey
@@ -16,7 +19,7 @@ data class FranchiseEntity (
     val updatedAt: Int,
 
     @ColumnInfo("games")
-    val games: List<Int?>,
+    val games: List<Int>,
 
     @ColumnInfo("name")
     val name: String,
@@ -35,4 +38,4 @@ data class FranchiseEntity (
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,
-)
+) : Parcelable

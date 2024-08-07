@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
 
@@ -45,6 +46,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    // implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,11 +1,14 @@
 package com.famandexpertapp1.core.data.source.local.entity
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "games_table")
 data class GamesEntity(
     @PrimaryKey
@@ -135,4 +138,4 @@ data class GamesEntity(
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,
-)
+) : Parcelable
