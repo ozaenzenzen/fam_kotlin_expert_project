@@ -1,4 +1,6 @@
 package com.example.famandexpertapp1.detail
 
-class DetailViewModel {
+import androidx.lifecycle.ViewModel
+
+class DetailViewModel : ViewModel(){
 }

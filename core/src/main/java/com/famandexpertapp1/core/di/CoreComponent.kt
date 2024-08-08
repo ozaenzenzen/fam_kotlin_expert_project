@@ -4,6 +4,12 @@ import android.content.Context
 import com.famandexpertapp1.core.domain.repository.IAppRepository
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
+
+@Singleton
+@Component(
+    modules = [RepositoryModule::class]
+)
 
 interface CoreComponent {
     @Component.Factory

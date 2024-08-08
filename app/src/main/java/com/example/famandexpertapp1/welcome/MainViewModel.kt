@@ -1,4 +1,6 @@
 package com.example.famandexpertapp1.welcome
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+
+class MainViewModel : ViewModel() {
 }

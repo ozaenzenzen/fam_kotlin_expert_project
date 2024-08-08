@@ -19,7 +19,7 @@ data class FranchiseEntity (
     val updatedAt: Int,
 
     @ColumnInfo("games")
-    val games: List<Int>,
+    val games: List<Int?>,
 
     @ColumnInfo("name")
     val name: String,

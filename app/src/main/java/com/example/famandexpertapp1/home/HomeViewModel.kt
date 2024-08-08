@@ -1,4 +1,6 @@
 package com.example.famandexpertapp1.home
 
-class HomeViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel : ViewModel() {
 }
