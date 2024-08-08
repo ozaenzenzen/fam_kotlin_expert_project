@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.famandexpertapp1.R
+import com.example.famandexpertapp1.databinding.ActivityDetailBinding
 import com.example.famandexpertapp1.favorite.FavoriteViewModel
 import com.famandexpertapp1.core.ui.ViewModelFactory
 import javax.inject.Inject
@@ -19,14 +20,23 @@ class DetailActivity : AppCompatActivity() {
         factory
     }
 
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_detail)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setToolbar("Detail Page")
+    }
+
+    private fun setToolbar(title: String) {
+        setSupportActionBar(binding.toolbar.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            // setDisplayHomeAsUpEnabled(true)
+            this.title = title
         }
     }
 }
