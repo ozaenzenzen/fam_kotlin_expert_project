@@ -24,7 +24,7 @@ class AppInteractor @Inject constructor(private val appRepository: IAppRepositor
     override fun getDetailGames(
         clientID: String,
         token: String,
-    ): Flow<Resource<Games>> = appRepository.getDetailGames(
+    ): Flow<Resource<List<Games>>> = appRepository.getDetailGames(
         clientID = clientID,
         token = token,
     )

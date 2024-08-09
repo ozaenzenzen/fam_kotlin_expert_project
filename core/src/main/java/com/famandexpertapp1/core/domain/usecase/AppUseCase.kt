@@ -16,5 +16,5 @@ interface AppUseCase {
     fun getDetailGames(
         clientID: String,
         token: String,
-    ): Flow<Resource<Games>>
+    ): Flow<Resource<List<Games>>>
 }

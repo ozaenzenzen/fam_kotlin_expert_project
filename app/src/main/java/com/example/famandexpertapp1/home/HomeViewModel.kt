@@ -6,7 +6,10 @@ import androidx.lifecycle.asLiveData
 import com.famandexpertapp1.core.domain.usecase.AppUseCase
 
 class HomeViewModel(private val useCase: AppUseCase) : ViewModel() {
-    val dataDetail = useCase.getDetailGames().asLiveData()
+    fun dataDetail(clientID: String, token: String) = useCase.getDetailGames(
+        clientID = clientID,
+        token = token,
+    ).asLiveData()
 
     fun dataList(clientID: String, token: String) = useCase.getAllFranchise(
         clientID, token,
