@@ -1,16 +1,15 @@
 package com.famandexpertapp1.core.data.source.local
 
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
-import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
+//import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
-import com.famandexpertapp1.core.data.source.local.room.GamesDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Named
 
 class LocalDataSource @Inject constructor(
     @Named("franchiseDao") private val franchiseDao: FranchiseDao,
-    @Named("gamesDao") private val gamesDao: GamesDao,
+//    @Named("gamesDao") private val gamesDao: GamesDao,
 ) {
 
 //    companion object {
@@ -34,5 +33,5 @@ class LocalDataSource @Inject constructor(
         franchiseDao.updateFavoriteFranchise(frachise)
     }
 
-    fun getAllGames(): Flow<List<GamesEntity>> = gamesDao.getAllGames()
+//    fun getAllGames(): Flow<List<GamesEntity>> = gamesDao.getAllGames()
 }

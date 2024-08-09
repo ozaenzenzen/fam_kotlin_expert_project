@@ -13,5 +13,8 @@ interface AppUseCase {
 
     fun getFavoriteFranchise(): Flow<List<Franchise>>
     fun setFavoriteFranchise(franchise: Franchise, state: Boolean)
-    fun getDetailGames(): Flow<Resource<Games>>
+    fun getDetailGames(
+        clientID: String,
+        token: String,
+    ): Flow<Resource<Games>>
 }

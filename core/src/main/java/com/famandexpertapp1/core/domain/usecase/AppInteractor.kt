@@ -21,5 +21,11 @@ class AppInteractor @Inject constructor(private val appRepository: IAppRepositor
     override fun setFavoriteFranchise(franchise: Franchise, state: Boolean) =
         appRepository.setFavoriteFranchise(franchise, state)
 
-    override fun getDetailGames(): Flow<Resource<Games>> = appRepository.getDetailGames()
+    override fun getDetailGames(
+        clientID: String,
+        token: String,
+    ): Flow<Resource<Games>> = appRepository.getDetailGames(
+        clientID = clientID,
+        token = token,
+    )
 }

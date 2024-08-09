@@ -3,6 +3,7 @@ package com.famandexpertapp1.core.data
 import com.famandexpertapp1.core.data.source.local.LocalDataSource
 import com.famandexpertapp1.core.data.source.remote.RemoteDataSource
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
+import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
@@ -55,8 +56,31 @@ class AppRepository @Inject constructor(
             .execute { localDataSource.setFavoriteFranchise(franchiseEntity, state) }
     }
 
-    override fun getDetailGames(): Flow<Resource<Games>> {
-        TODO("Not yet implemented")
+    override fun getDetailGames(
+        clientID: String,
+        token: String,
+    ): Flow<Resource<List<Games>>> {
+        return object :
+            NetworkBoundResource<List<Games>, List<DetailGamesResponseModelItem?>>(
+                appExecutors
+            ) {
+            override fun loadFromDB(): Flow<List<Games>> {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<DetailGamesResponseModelItem?>>> {
+                return remoteDataSource.getDetailGames(clientID, token)
+            }
+
+            override suspend fun saveCallResult(data: List<DetailGamesResponseModelItem?>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun shouldFetch(data: List<Games>?): Boolean =
+                data == null || data.isEmpty()
+
+
+        }.asFlow()
     }
 
 }

@@ -23,8 +23,10 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    ksp(libs.room.compiler)
-//    kapt(libs.room.compiler)
+//    ksp(libs.room.compiler)
+    kapt(libs.room.compiler)
+//    annotationProcessor(libs.room.compiler)
+    androidTestImplementation("androidx.room:room-testing:2.5.2")
 
     // camerax
     implementation(libs.androidx.camera.camera2)
@@ -39,10 +41,17 @@ dependencies {
 
     //Dagger
     implementation("com.google.dagger:dagger:2.29.1")
-    ksp("com.google.dagger:dagger-compiler:2.29.1")
-//    kapt("com.google.dagger:dagger-compiler:2.29.1")
+//    ksp("com.google.dagger:dagger-compiler:2.29.1")
+    kapt("com.google.dagger:dagger-compiler:2.29.1")
+//    annotationProcessor("com.google.dagger:dagger-compiler:2.29.1")
 
     //by viewModels di Activity dan Fragment
     implementation("androidx.activity:activity-ktx:1.1.0")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
+
+    implementation("io.reactivex.rxjava2:rxjava:2.2.19")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("androidx.room:room-rxjava2:2.5.2")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0")
 }
