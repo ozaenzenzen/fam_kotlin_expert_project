@@ -6,10 +6,11 @@ import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
 import com.famandexpertapp1.core.data.source.local.room.GamesDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Named
 
 class LocalDataSource @Inject constructor(
-    private val franchiseDao: FranchiseDao,
-    private val gamesDao: GamesDao,
+    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
+    @Named("gamesDao") private val gamesDao: GamesDao,
 ) {
 
 //    companion object {
@@ -23,12 +24,12 @@ class LocalDataSource @Inject constructor(
 
     fun getAllFranchise(): Flow<List<FranchiseEntity>> = franchiseDao.getAllFranchise()
 
-    fun getFavoriteTourism(): Flow<List<FranchiseEntity>> = franchiseDao.getFavoriteFranchise()
+    fun getFavoriteFranchise(): Flow<List<FranchiseEntity>> = franchiseDao.getFavoriteFranchise()
 
-    suspend fun insertTourism(tourismList: List<FranchiseEntity>) =
+    suspend fun insertFranchise(tourismList: List<FranchiseEntity>) =
         franchiseDao.insertFranchise(tourismList)
 
-    fun setFavoriteTourism(frachise: FranchiseEntity, newState: Boolean) {
+    fun setFavoriteFranchise(frachise: FranchiseEntity, newState: Boolean) {
         frachise.isFavorite = newState
         franchiseDao.updateFavoriteFranchise(frachise)
     }

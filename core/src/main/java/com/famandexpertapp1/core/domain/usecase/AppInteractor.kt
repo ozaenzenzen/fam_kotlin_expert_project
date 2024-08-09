@@ -8,12 +8,18 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AppInteractor @Inject constructor(private val appRepository: IAppRepository) : AppUseCase {
-    override fun getAllFranchise() = appRepository.getAllFranchise()
+    override fun getAllFranchise(
+        clientID: String,
+        token: String,
+    ) = appRepository.getAllFranchise(
+        clientID = clientID,
+        token = token,
+    )
 
     override fun getFavoriteFranchise() = appRepository.getFavoriteFranchise()
 
     override fun setFavoriteFranchise(franchise: Franchise, state: Boolean) =
-        appRepository.setFavoriteFranchise(franchise, state )
+        appRepository.setFavoriteFranchise(franchise, state)
 
     override fun getDetailGames(): Flow<Resource<Games>> = appRepository.getDetailGames()
 }

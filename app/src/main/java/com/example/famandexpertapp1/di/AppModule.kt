@@ -9,5 +9,5 @@ import dagger.Module
 abstract class AppModule {
 
     @Binds
-    abstract fun provideFranchiseUseCase(appInteractor: AppInteractor): AppUseCase
+    abstract fun provideAppUseCase(appInteractor: AppInteractor): AppUseCase
 }

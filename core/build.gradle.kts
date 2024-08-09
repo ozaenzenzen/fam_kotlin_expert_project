@@ -47,4 +47,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Dagger
+    implementation("com.google.dagger:dagger:2.29.1")
+    ksp("com.google.dagger:dagger-compiler:2.29.1")
 }

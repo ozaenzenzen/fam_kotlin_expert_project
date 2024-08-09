@@ -12,7 +12,6 @@ import dagger.Component
     dependencies = [CoreComponent::class],
     modules = [AppModule::class],
 )
-
 interface AppComponent {
     @Component.Factory
     interface Factory {

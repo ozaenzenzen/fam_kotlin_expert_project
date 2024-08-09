@@ -2,6 +2,7 @@ package com.famandexpertapp1.core.utils
 
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
 import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
+import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
 
@@ -98,6 +99,25 @@ object DataMapper {
         involvedCompanies = input.involvedCompanies,
         isFavorite = input.isFavorite,
     )
+
+    fun mapFranchiseResponsesToEntities(input: List<ListFranchiseResponseModelItem?>): List<FranchiseEntity> {
+        val franchiseList = ArrayList<FranchiseEntity>()
+        input.map { it ->
+            val franchise = FranchiseEntity(
+                id = it?.id!!,
+                updatedAt = it.updatedAt!!,
+                games = it.games!!,
+                name = it.name!!,
+                checksum = it.checksum!!,
+                createdAt = it.createdAt!!,
+                slug = it.slug!!,
+                url = it.url!!,
+                isFavorite = false,
+            )
+            franchiseList.add(franchise)
+        }
+        return franchiseList
+    }
 
     fun mapFranchiseEntitiesToDomain(input: List<FranchiseEntity>): List<Franchise> =
         input.map {

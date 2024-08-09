@@ -23,7 +23,7 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-//    ksp(libs.room.compiler)
+    ksp(libs.room.compiler)
 //    kapt(libs.room.compiler)
 
     // camerax
@@ -39,7 +39,7 @@ dependencies {
 
     //Dagger
     implementation("com.google.dagger:dagger:2.29.1")
-//    ksp("com.google.dagger:dagger-compiler:2.29.1")
+    ksp("com.google.dagger:dagger-compiler:2.29.1")
 //    kapt("com.google.dagger:dagger-compiler:2.29.1")
 
     //by viewModels di Activity dan Fragment
