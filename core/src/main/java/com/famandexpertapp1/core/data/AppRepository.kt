@@ -34,8 +34,8 @@ class AppRepository @Inject constructor(
 
 
             override suspend fun saveCallResult(data: List<ListFranchiseResponseModelItem?>) {
-                val franchiseList = DataMapper.mapFranchiseResponsesToEntities(data)
-                localDataSource.insertFranchise(franchiseList)
+//                val franchiseList = DataMapper.mapFranchiseResponsesToEntities(data)
+//                localDataSource.insertFranchise(franchiseList)
             }
 
             override fun shouldFetch(data: List<Franchise>?): Boolean =

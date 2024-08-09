@@ -13,8 +13,8 @@ interface FranchiseDao {
     @Query("SELECT * FROM franchise_table where isFavorite = 1")
     fun getFavoriteFranchise(): Flow<List<FranchiseEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFranchise(tourism: List<FranchiseEntity>)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertFranchise(tourism: List<FranchiseEntity>)
 
     @Update
     fun updateFavoriteFranchise(tourism: FranchiseEntity)

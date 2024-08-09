@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-//    id("com.google.devtools.ksp")
+//    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
 
@@ -40,16 +40,10 @@ android {
 }
 
 dependencies {
-//    implementation(project(":app"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-//    //Dagger
-//    implementation("com.google.dagger:dagger:2.29.1")
-//    ksp("com.google.dagger:dagger-compiler:2.29.1")
 }
