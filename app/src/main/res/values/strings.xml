@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FAMAndExpertApp1</string>
+
+    //Activity Main
+    <string name="title_welcome_page">Selamat datang di Game Blog!</string>
+    <string name="description_welcome_page">Dunia game dalam genggaman anda</string>
+    <string name="login">Masuk</string>
 </resources>

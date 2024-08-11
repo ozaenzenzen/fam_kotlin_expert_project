@@ -42,4 +42,9 @@ class FavoriteActivity : AppCompatActivity() {
             this.title = title
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

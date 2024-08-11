@@ -12,4 +12,6 @@
     <color name="dark_blue_200">#161B22</color>
     <color name="dark_blue_500">#0D1013</color>
     <color name="dark_blue_700">#212F3E</color>
+
+    <color name="navy">#2D3D4F</color>
 </resources>

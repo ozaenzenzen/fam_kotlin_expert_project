@@ -1,6 +1,7 @@
 package com.example.famandexpertapp1.home
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -41,5 +42,10 @@ class HomeActivity : AppCompatActivity() {
             // setDisplayHomeAsUpEnabled(true)
             this.title = title
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 }
