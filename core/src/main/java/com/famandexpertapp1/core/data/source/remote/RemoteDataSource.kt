@@ -5,6 +5,7 @@ import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
 import com.famandexpertapp1.core.data.source.remote.network.ApiService
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.GenerateTokenResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,28 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 //            instance ?: synchronized(this) {
 //                instance ?: RemoteDataSource(service)
 //            }
+//    }
+
+//    suspend fun generateToken(
+//        clientID: String,
+//        clientSecret: String,
+//    ): Flow<ApiResponse<GenerateTokenResponseModel>> {
+//        return flow {
+//            try {
+//                val response = apiService.generateToken(
+//                    clientID = clientID,
+//                    clientSecret = clientSecret,
+//                )
+//                if (response.tokenType != null) {
+//                    emit(ApiResponse.Success(response))
+//                } else {
+//                    emit(ApiResponse.Empty)
+//                }
+//            } catch (e: Exception) {
+//                emit(ApiResponse.Error(e.toString()))
+//                Log.e("generateToken", e.toString())
+//            }
+//        }.flowOn(Dispatchers.IO)
 //    }
 
     suspend fun getAllFranchise(

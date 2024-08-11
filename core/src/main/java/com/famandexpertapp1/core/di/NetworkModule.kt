@@ -1,5 +1,6 @@
 package com.famandexpertapp1.core.di
 
+import com.famandexpertapp1.core.BuildConfig.API_BASE_URL
 import com.famandexpertapp1.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -26,10 +27,21 @@ class NetworkModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.igdb.com/v4/")
+            .baseUrl(API_BASE_URL)
+//            .baseUrl("https://api.igdb.com/v4/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
         return retrofit.create(ApiService::class.java)
     }
+
+//    @Provides
+//    fun provideApiService(client: OkHttpClient, baseUrl: String?): ApiService {
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl(baseUrl ?: "https://api.igdb.com/v4/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(client)
+//            .build()
+//        return retrofit.create(ApiService::class.java)
+//    }
 }
