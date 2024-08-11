@@ -15,6 +15,5 @@
         android:theme="@style/ToolbarTheme"
         app:menu="@menu/menu"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/app_name"
-        app:titleTextColor="@color/black" />
+        app:title="@string/app_name" />
 </com.google.android.material.appbar.AppBarLayout>

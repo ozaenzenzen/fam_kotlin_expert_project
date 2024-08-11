@@ -1,5 +1,7 @@
 package com.example.famandexpertapp1.home
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.enableEdgeToEdge
@@ -40,6 +42,7 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
             // setDisplayHomeAsUpEnabled(true)
+//            setBackgroundDrawable(ColorDrawable(Color.parseColor("#161B22")))
             this.title = title
         }
     }
