@@ -9,16 +9,19 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityFavoriteBinding
 import com.example.famandexpertapp1.home.HomeViewModel
-import com.famandexpertapp1.core.ui.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
-    @Inject
-    lateinit var factory: ViewModelFactory
+//    @Inject
+//    lateinit var factory: ViewModelFactory
+//
+//    private val favoriteViewModel: FavoriteViewModel by viewModels {
+//        factory
+//    }
 
-    private val favoriteViewModel: FavoriteViewModel by viewModels {
-        factory
-    }
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     private lateinit var binding: ActivityFavoriteBinding
 

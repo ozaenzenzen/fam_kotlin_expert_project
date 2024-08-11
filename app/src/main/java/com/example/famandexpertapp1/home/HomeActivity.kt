@@ -9,16 +9,19 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityHomeBinding
 import com.example.famandexpertapp1.welcome.MainViewModel
-import com.famandexpertapp1.core.ui.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    @Inject
-    lateinit var factory: ViewModelFactory
+//    @Inject
+//    lateinit var factory: ViewModelFactory
+//
+//    private val homeViewModel: HomeViewModel by viewModels {
+//        factory
+//    }
 
-    private val homeViewModel: HomeViewModel by viewModels {
-        factory
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: ActivityHomeBinding
 

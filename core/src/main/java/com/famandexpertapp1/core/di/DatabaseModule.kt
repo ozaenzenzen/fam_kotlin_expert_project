@@ -9,14 +9,18 @@ import com.famandexpertapp1.core.data.source.local.room.FranchiseDatabase
 import com.famandexpertapp1.core.domain.model.Games
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideDatabaseFranchise(context: Context): FranchiseDatabase =
+    fun provideDatabaseFranchise(@ApplicationContext context: Context): FranchiseDatabase =
         Room.databaseBuilder(
             context,
             FranchiseDatabase::class.java, "Franchise.db"
