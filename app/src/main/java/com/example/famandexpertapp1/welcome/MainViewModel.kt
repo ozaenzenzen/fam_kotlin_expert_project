@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val useCase: AppUseCase) : ViewModel() {
-    fun setToken(value: String) = useCase.setToken(
+    fun setToken() = useCase.setToken(
         ACCESS_TOKEN,
     )
 
-    fun getToken() = useCase.getToken().asLiveData()
+    fun getToken() = useCase.getToken()
 }

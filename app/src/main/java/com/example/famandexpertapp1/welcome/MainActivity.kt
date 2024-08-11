@@ -4,17 +4,20 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.famandexpertapp1.MyApplication
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityMainBinding
 import com.example.famandexpertapp1.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,11 +42,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         playAnimation()
+        onInit()
 
         binding.loginButton.setOnClickListener {
+            mainViewModel.setToken()
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+        }
+    }
+
+    private fun onInit() {
+        lifecycleScope.launchWhenCreated {
+            launch {
+                mainViewModel.getToken().collect { token ->
+                    Log.d("TOKEN_DATA", "data $token")
+                    if (token.isNullOrEmpty() || token == "null") {
+//                        val intent = Intent(this@MainActivity, MainActivity::class.java)
+//                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                    }
+                }
+            }
         }
     }
 
