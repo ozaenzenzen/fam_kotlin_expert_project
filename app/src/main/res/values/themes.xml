@@ -10,6 +10,7 @@
         Ï<item name="colorPrimary">@color/dark_blue_200</item>
         <item name="colorPrimaryVariant">@color/dark_blue_700</item>
         <item name="actionBarTheme">@style/ActionBarStyle</item>
+<!--        <item name="android:tint">@color/white</item>-->
     </style>
 
     <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">

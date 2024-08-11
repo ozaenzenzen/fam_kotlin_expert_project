@@ -17,4 +17,6 @@ class HomeViewModel @Inject constructor(private val useCase: AppUseCase) : ViewM
     fun dataList(clientID: String, token: String) = useCase.getAllFranchise(
         clientID, token,
     ).asLiveData()
+
+    fun removeToken() = useCase.setToken("")
 }

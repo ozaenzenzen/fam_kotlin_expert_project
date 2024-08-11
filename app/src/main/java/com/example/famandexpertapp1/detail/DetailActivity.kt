@@ -39,7 +39,7 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
-            // setDisplayHomeAsUpEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
             this.title = title
         }
     }
