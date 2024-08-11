@@ -26,8 +26,8 @@ class LocalDataSource @Inject constructor(
 
     fun getFavoriteFranchise(): Flow<List<FranchiseEntity>> = franchiseDao.getFavoriteFranchise()
 
-//    suspend fun insertFranchise(tourismList: List<FranchiseEntity>) =
-//        franchiseDao.insertFranchise(tourismList)
+    suspend fun insertFranchise(tourismList: List<FranchiseEntity>) =
+        franchiseDao.insertFranchise(tourismList)
 
     fun setFavoriteFranchise(frachise: FranchiseEntity, newState: Boolean) {
         frachise.isFavorite = newState
