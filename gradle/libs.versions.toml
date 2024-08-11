@@ -22,6 +22,7 @@ kotlinVersion = "1.9.0"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 roomKtx = "2.6.1"
+swiperefreshlayout = "1.1.0"
 
 
 [libraries]
@@ -48,6 +49,7 @@ androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", v
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 # implementation "androidx.room:room-ktx:$room_version"
 
 
