@@ -19,9 +19,9 @@ pagingRuntimeKtx = "3.1.0"
 kotlinVersion = "1.9.0"
 
 #Room 2.5.2 "2.4.0-alpha03"
-roomCompiler = "2.5.2"
-roomRuntime = "2.5.2"
-roomKtx = "2.5.2"
+roomCompiler = "2.6.1"
+roomRuntime = "2.6.1"
+roomKtx = "2.6.1"
 
 
 [libraries]
