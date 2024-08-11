@@ -28,4 +28,12 @@ class AppInteractor @Inject constructor(private val appRepository: IAppRepositor
         clientID = clientID,
         token = token,
     )
+
+    override fun getToken(): Flow<String> {
+        return appRepository.getToken()
+    }
+
+    override fun setToken(value: String) {
+        appRepository.setToken(value)
+    }
 }

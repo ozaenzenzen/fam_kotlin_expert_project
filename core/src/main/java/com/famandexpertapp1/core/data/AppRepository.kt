@@ -12,6 +12,7 @@ import com.famandexpertapp1.core.utils.AppExecutors
 import com.famandexpertapp1.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -81,6 +82,22 @@ class AppRepository @Inject constructor(
 
 
         }.asFlow()
+    }
+
+    override fun getToken(): Flow<String> {
+        val dataToken = localDataSource.getToken().map { value ->
+            value.toString()
+        }
+        return dataToken
+    }
+
+    override fun setToken(value: String) {
+        appExecutors.diskIO()
+            .execute {
+                runBlocking {
+                    localDataSource.setToken(value)
+                }
+            }
     }
 
 }

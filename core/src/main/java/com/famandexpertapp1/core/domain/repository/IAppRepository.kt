@@ -17,4 +17,7 @@ interface IAppRepository {
         clientID: String,
         token: String,
     ): Flow<Resource<List<Games>>>
+
+    fun getToken(): Flow<String>
+    fun setToken(value: String)
 }

@@ -3,12 +3,14 @@ package com.famandexpertapp1.core.data.source.local
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
 //import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
+import com.famandexpertapp1.core.data.source.local.userpref.UserDataPreferences
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Named
 
 class LocalDataSource @Inject constructor(
     private val franchiseDao: FranchiseDao,
+    private val userDataPreferences: UserDataPreferences
 //    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
 //    @Named("gamesDao") private val gamesDao: GamesDao,
 ) {
@@ -35,4 +37,12 @@ class LocalDataSource @Inject constructor(
     }
 
 //    fun getAllGames(): Flow<List<GamesEntity>> = gamesDao.getAllGames()
+
+    fun getToken(): Flow<String?> {
+        return userDataPreferences.getToken()
+    }
+
+    suspend fun setToken(value: String) {
+        userDataPreferences.setToken(value)
+    }
 }
