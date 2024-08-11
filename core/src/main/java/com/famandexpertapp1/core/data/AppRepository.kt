@@ -10,8 +10,11 @@ import com.famandexpertapp1.core.domain.model.Games
 import com.famandexpertapp1.core.domain.repository.IAppRepository
 import com.famandexpertapp1.core.utils.AppExecutors
 import com.famandexpertapp1.core.utils.DataMapper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -94,9 +97,12 @@ class AppRepository @Inject constructor(
     override fun setToken(value: String) {
         appExecutors.diskIO()
             .execute {
-                runBlocking {
+                CoroutineScope(Dispatchers.IO).launch {
                     localDataSource.setToken(value)
                 }
+//                runBlocking {
+//                    localDataSource.setToken(value)
+//                }
             }
     }
 
