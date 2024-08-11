@@ -1,3 +1,11 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.gradle.internal.impldep.com.google.api.client.googleapis.testing.auth.oauth2.MockGoogleCredential.ACCESS_TOKEN
+import java.util.*
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").reader())
+val secretToken: String = localProperties.getProperty("ACCESS_TOKEN_LOCPROP")
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -20,6 +28,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "API_BASE_URL", "\"" + "https://api.igdb.com/v4/" + "\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"" + "$secretToken" + "\"")
     }
 
     buildTypes {
@@ -30,6 +41,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
