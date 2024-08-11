@@ -8,7 +8,8 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class LocalDataSource @Inject constructor(
-    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
+    private val franchiseDao: FranchiseDao,
+//    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
 //    @Named("gamesDao") private val gamesDao: GamesDao,
 ) {
 

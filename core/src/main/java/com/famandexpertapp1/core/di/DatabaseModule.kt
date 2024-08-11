@@ -23,8 +23,12 @@ class DatabaseModule {
         ).fallbackToDestructiveMigration().build()
 
     @Provides
-    fun provideFranchiseDao(@Named("franchiseDao") database: FranchiseDatabase): FranchiseDao =
+    fun provideFranchiseDao(database: FranchiseDatabase): FranchiseDao =
         database.franchiseDao()
+
+//    @Provides
+//    fun provideFranchiseDao(@Named("franchiseDao") database: FranchiseDatabase): FranchiseDao =
+//        database.franchiseDao()
 
 //    @Singleton
 //    @Provides
