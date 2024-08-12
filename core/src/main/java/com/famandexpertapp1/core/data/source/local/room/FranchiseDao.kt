@@ -2,6 +2,7 @@ package com.famandexpertapp1.core.data.source.local.room
 
 import androidx.room.*
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
+import com.famandexpertapp1.core.data.source.local.entity.ScreenshotEntity
 import io.reactivex.Completable
 import kotlinx.coroutines.flow.Flow
 

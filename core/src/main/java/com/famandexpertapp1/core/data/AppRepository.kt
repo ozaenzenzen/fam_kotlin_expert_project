@@ -120,7 +120,8 @@ class AppRepository @Inject constructor(
             appExecutors
         ) {
             override fun loadFromDB(): Flow<List<Screenshot>> {
-                return flowOf(emptyList())
+                return localDataSource.getAllScreenshot()
+                    .map { DataMapper.mapScreenshotEntitiesToDomain(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ScreenshotResponseModelItem?>>> {
@@ -132,7 +133,8 @@ class AppRepository @Inject constructor(
             }
 
             override suspend fun saveCallResult(data: List<ScreenshotResponseModelItem?>) {
-                localDataSource.getScreenshot()
+                val screenshotList = DataMapper.mapScreenshotResponsesToEntities(data)
+                localDataSource.insertScreenshot(screenshotList)
             }
 
             override fun shouldFetch(data: List<Screenshot>?): Boolean {

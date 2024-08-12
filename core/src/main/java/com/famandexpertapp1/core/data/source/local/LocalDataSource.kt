@@ -1,18 +1,22 @@
 package com.famandexpertapp1.core.data.source.local
 
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
+import com.famandexpertapp1.core.data.source.local.entity.ScreenshotEntity
 //import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
+import com.famandexpertapp1.core.data.source.local.room.ScreenshotDao
 import com.famandexpertapp1.core.data.source.local.userpref.UserDataPreferences
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Named
 
 class LocalDataSource @Inject constructor(
-    private val franchiseDao: FranchiseDao,
-    private val userDataPreferences: UserDataPreferences
+//    private val franchiseDao: FranchiseDao,
+    private val userDataPreferences: UserDataPreferences,
 //    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
-//    @Named("gamesDao") private val gamesDao: GamesDao,
+//    @Named("screenshotDao") private val screenshotDao: ScreenshotDao,
+    private val franchiseDao: FranchiseDao,
+    private val screenshotDao: ScreenshotDao,
 ) {
 
 //    companion object {
@@ -49,4 +53,9 @@ class LocalDataSource @Inject constructor(
     suspend fun getScreenshot() {
         // This function does nothing
     }
+
+    fun getAllScreenshot(): Flow<List<ScreenshotEntity>> = screenshotDao.getAllScreenshot()
+
+    suspend fun insertScreenshot(screenshotList: List<ScreenshotEntity>) =
+        screenshotDao.insertScreenshot(screenshotList)
 }

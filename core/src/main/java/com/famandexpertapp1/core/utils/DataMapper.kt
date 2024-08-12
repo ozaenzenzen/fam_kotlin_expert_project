@@ -1,10 +1,13 @@
 package com.famandexpertapp1.core.utils
 
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
+import com.famandexpertapp1.core.data.source.local.entity.ScreenshotEntity
 //import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
+import com.famandexpertapp1.core.domain.model.Screenshot
 
 object DataMapper {
 //    fun mapGamesEntitiesToDomain(input: List<GamesEntity>): List<Games> =
@@ -146,5 +149,51 @@ object DataMapper {
         url = input.url,
         image = input.image,
         isFavorite = input.isFavorite,
+    )
+
+    fun mapScreenshotResponsesToEntities(input: List<ScreenshotResponseModelItem?>): List<ScreenshotEntity> {
+        val screenshotList = ArrayList<ScreenshotEntity>()
+        input.map { it ->
+            val screenshot = ScreenshotEntity(
+                game = it!!.game ?: 0,
+                width = it.width ?: 0,
+                checksum = it.checksum ?: "",
+                id = it.id ?: 0,
+                imageId = it.imageId ?: "",
+                url = it.url ?: "",
+                height = it.height ?: 0,
+                alphaChannel = it.alphaChannel ?: false,
+                animated = it.animated ?: false,
+            )
+            screenshotList.add(screenshot)
+        }
+        return screenshotList
+    }
+
+    fun mapScreenshotEntitiesToDomain(input: List<ScreenshotEntity>): List<Screenshot> =
+        input.map {
+            Screenshot(
+                game = it.game,
+                width = it.width,
+                checksum = it.checksum,
+                id = it.id,
+                imageId = it.imageId,
+                url = it.url,
+                height = it.height,
+                alphaChannel = it.alphaChannel,
+                animated = it.animated,
+            )
+        }
+
+    fun mapScreenshotDomainToEntity(input: Screenshot) = ScreenshotEntity(
+        game = input.game!!,
+        width = input.width!!,
+        checksum = input.checksum!!,
+        id = input.id!!,
+        imageId = input.imageId!!,
+        url = input.url!!,
+        height = input.height!!,
+        alphaChannel = input.alphaChannel!!,
+        animated = input.animated!!,
     )
 }
