@@ -3,14 +3,14 @@ package com.famandexpertapp1.core.data.source.remote
 import android.util.Log
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
 import com.famandexpertapp1.core.data.source.remote.network.ApiService
-import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
-import com.famandexpertapp1.core.data.source.remote.remote.GenerateTokenResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
@@ -52,16 +52,25 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
     ): Flow<ApiResponse<List<ListFranchiseResponseModelItem?>>> {
         return flow {
             try {
-                val response = apiService.getAllFranchise(clientID, token)
-                val dataArray = response.listFranchiseResponseModel
-                if (dataArray!!.isNotEmpty()) {
-                    emit(ApiResponse.Success(response.listFranchiseResponseModel))
+                val reqBody = RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    "fields checksum,created_at,games,name,slug,updated_at,url;",
+                )
+                val response = apiService.getAllFranchise(
+                    clientID,
+                    token,
+                    "application/json",
+                    reqBody,
+                    )
+                Log.e("responseLog", "response ${response}")
+                if (response.isNotEmpty()) {
+                    emit(ApiResponse.Success(response))
                 } else {
                     emit(ApiResponse.Empty)
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSource", e.toString())
+                Log.e("Error getAllFranchise", e.toString())
             }
         }.flowOn(Dispatchers.IO)
     }

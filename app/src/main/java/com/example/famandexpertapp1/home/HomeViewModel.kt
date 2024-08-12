@@ -19,4 +19,5 @@ class HomeViewModel @Inject constructor(private val useCase: AppUseCase) : ViewM
     ).asLiveData()
 
     fun removeToken() = useCase.setToken("")
+    fun getToken() = useCase.getToken().asLiveData()
 }

@@ -40,6 +40,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
             setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_white_24)
             this.title = title
         }
     }

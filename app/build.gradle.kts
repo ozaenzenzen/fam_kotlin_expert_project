@@ -1,3 +1,9 @@
+import java.util.Properties
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").reader())
+val clientIDData: String = localProperties.getProperty("ACCESS_CLIENTID_LOCPROP")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -23,6 +29,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ACCESS_CLIENT_ID", "\"" + "$clientIDData" + "\"")
     }
 
     buildTypes {

@@ -5,4 +5,9 @@
     <string name="title_welcome_page">Selamat datang di Game Blog!</string>
     <string name="description_welcome_page">Dunia game dalam genggaman anda</string>
     <string name="login">Masuk</string>
+
+    //Activity Home
+    <string name="no_data">No data</string>
+    <string name="stories_not_found_error">Stories not found</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
 </resources>

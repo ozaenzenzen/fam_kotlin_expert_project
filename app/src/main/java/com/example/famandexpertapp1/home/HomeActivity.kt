@@ -1,24 +1,23 @@
 package com.example.famandexpertapp1.home
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.famandexpertapp1.BuildConfig.ACCESS_CLIENT_ID
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityHomeBinding
+import com.example.famandexpertapp1.detail.DetailActivity
 import com.example.famandexpertapp1.favorite.FavoriteActivity
 import com.example.famandexpertapp1.welcome.MainActivity
-import com.example.famandexpertapp1.welcome.MainViewModel
+import com.famandexpertapp1.core.ui.FranchiseAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -33,6 +32,8 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
+    private lateinit var franchiseAdapter: FranchiseAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,6 +41,65 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setToolbar("Home Page")
+        setupAdapter()
+        getDataList()
+    }
+
+    private fun setupAdapter() {
+        franchiseAdapter = FranchiseAdapter()
+        franchiseAdapter.onItemClick = { selectedData ->
+            val intent = Intent(this@HomeActivity, DetailActivity::class.java)
+//            intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
+            startActivity(intent)
+        }
+    }
+
+    private fun getDataList() {
+        homeViewModel.getToken().observe(this) { valueToken ->
+            homeViewModel.dataList(
+                clientID = ACCESS_CLIENT_ID,
+                token = "Bearer $valueToken",
+            ).observe(this) { franchise ->
+                Log.d("home view", "${franchise}")
+                if (franchise != null) {
+                    when (franchise) {
+                        is com.famandexpertapp1.core.data.Resource.Loading -> binding.viewLoading.visibility =
+                            View.VISIBLE
+
+                        is com.famandexpertapp1.core.data.Resource.Success -> {
+                            binding.viewLoading.visibility = View.GONE
+
+                            binding.tvNotFoundError.visibility = View.GONE
+                            binding.ivNotFoundError.visibility = View.GONE
+
+                            franchiseAdapter.setData(franchise.data)
+                        }
+
+                        is com.famandexpertapp1.core.data.Resource.Error -> {
+                            binding.viewLoading.visibility = View.GONE
+
+                            binding.tvNotFoundError.visibility = View.VISIBLE
+                            binding.ivNotFoundError.visibility = View.VISIBLE
+
+                            binding.tvNotFoundError.text = getString(R.string.something_wrong)
+                        }
+                    }
+                } else {
+                    binding.viewLoading.visibility = View.GONE
+
+                    binding.tvNotFoundError.visibility = View.VISIBLE
+                    binding.ivNotFoundError.visibility = View.VISIBLE
+
+                    binding.tvNotFoundError.text = getString(R.string.something_wrong)
+                }
+            }
+            with(binding.rvStories) {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = franchiseAdapter
+            }
+        }
+
     }
 
     private fun setToolbar(title: String) {
@@ -47,7 +107,6 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
             // setDisplayHomeAsUpEnabled(true)
-//            setBackgroundDrawable(ColorDrawable(Color.parseColor("#161B22")))
             this.title = title
         }
         val drawable = binding.toolbar.toolbar.overflowIcon
@@ -62,7 +121,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.favorites -> {
-                Intent(this@HomeActivity, FavoriteActivity::class.java).also { it ->
+                Intent(this@HomeActivity, FavoriteActivity::class.java).also {
                     startActivity(it)
                 }
                 return true
@@ -70,7 +129,7 @@ class HomeActivity : AppCompatActivity() {
 
             R.id.logout -> {
                 homeViewModel.removeToken()
-                Intent(this@HomeActivity, MainActivity::class.java).also { it ->
+                Intent(this@HomeActivity, MainActivity::class.java).also {
                     startActivity(it)
                     finish()
                 }
