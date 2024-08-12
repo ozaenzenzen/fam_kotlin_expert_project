@@ -45,4 +45,8 @@ class LocalDataSource @Inject constructor(
     suspend fun setToken(value: String) {
         userDataPreferences.setToken(value)
     }
+
+    suspend fun getScreenshot() {
+        // This function does nothing
+    }
 }

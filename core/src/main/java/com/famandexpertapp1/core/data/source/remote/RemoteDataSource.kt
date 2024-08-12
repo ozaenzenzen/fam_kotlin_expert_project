@@ -5,6 +5,7 @@ import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
 import com.famandexpertapp1.core.data.source.remote.network.ApiService
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -61,7 +62,7 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
                     token,
                     "application/json",
                     reqBody,
-                    )
+                )
                 Log.e("responseLog", "response ${response}")
                 if (response.isNotEmpty()) {
                     emit(ApiResponse.Success(response))
@@ -71,6 +72,37 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("Error getAllFranchise", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getScreenshot(
+        clientID: String,
+        token: String,
+        gamesID: String?,
+    ): Flow<ApiResponse<List<ScreenshotResponseModelItem?>>> {
+        return flow {
+            try {
+                val reqBody = if (gamesID == null) {
+                    RequestBody.create(
+                        "text/plain".toMediaTypeOrNull(),
+                        "fields checksum,created_at,games,name,slug,updated_at,url;",
+                    )
+                } else {
+                    RequestBody.create(
+                        "text/plain".toMediaTypeOrNull(),
+                        "fields alpha_channel,animated,checksum,game,height,image_id,url,width; where id = $gamesID;",
+                    )
+                }
+                val response = apiService.getScreenshot(clientID, token, body = reqBody)
+                if (response.isNotEmpty()) {
+                    emit(ApiResponse.Success(response))
+                } else {
+                    emit(ApiResponse.Empty)
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("Error getScreenshot", e.toString())
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -90,7 +122,7 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
                 }
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSource", e.toString())
+                Log.e("Error getDetailGames", e.toString())
             }
         }.flowOn(Dispatchers.IO)
     }

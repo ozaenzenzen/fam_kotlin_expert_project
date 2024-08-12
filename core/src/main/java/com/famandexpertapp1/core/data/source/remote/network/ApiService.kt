@@ -5,6 +5,8 @@ import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseMo
 import com.famandexpertapp1.core.data.source.remote.remote.GenerateTokenResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -26,6 +28,14 @@ interface ApiService {
         @Header("Accept") accept: String? = "application/json",
         @Body body: RequestBody,
     ): List<ListFranchiseResponseModelItem?>
+
+    @POST("screenshots")
+    suspend fun getScreenshot(
+        @Header("Client-ID") clientID: String,
+        @Header("Authorization") token: String,
+        @Header("Accept") accept: String? = "application/json",
+        @Body body: RequestBody,
+    ): List<ScreenshotResponseModelItem?>
 
     @POST("games")
     suspend fun getDetailGames(

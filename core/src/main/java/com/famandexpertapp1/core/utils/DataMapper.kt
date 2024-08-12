@@ -131,6 +131,7 @@ object DataMapper {
                 slug = it.slug,
                 url = it.url,
                 isFavorite = it.isFavorite,
+                image = it.image,
             )
         }
 
@@ -143,6 +144,7 @@ object DataMapper {
         createdAt = input.createdAt,
         slug = input.slug,
         url = input.url,
+        image = input.image,
         isFavorite = input.isFavorite,
     )
 }

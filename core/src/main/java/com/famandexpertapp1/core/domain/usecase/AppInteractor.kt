@@ -1,8 +1,10 @@
 package com.famandexpertapp1.core.domain.usecase
 
 import com.famandexpertapp1.core.data.Resource
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
+import com.famandexpertapp1.core.domain.model.Screenshot
 import com.famandexpertapp1.core.domain.repository.IAppRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -35,5 +37,17 @@ class AppInteractor @Inject constructor(private val appRepository: IAppRepositor
 
     override fun setToken(value: String) {
         appRepository.setToken(value)
+    }
+
+    override fun getScreenshot(
+        clientID: String,
+        token: String,
+        gamesID: String,
+    ): Flow<Resource<List<Screenshot>>> {
+        return appRepository.getScreenshot(
+            clientID = clientID,
+            token = token,
+            gamesID = gamesID,
+        )
     }
 }

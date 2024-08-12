@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.famandexpertapp1.core.R
 import com.famandexpertapp1.core.databinding.ItemListFranchiseBinding
 import com.famandexpertapp1.core.domain.model.Franchise
+import com.famandexpertapp1.core.domain.model.Screenshot
 
 class FranchiseAdapter : RecyclerView.Adapter<FranchiseAdapter.ListViewHolder>() {
     private var listData = ArrayList<Franchise>()
@@ -37,9 +38,9 @@ class FranchiseAdapter : RecyclerView.Adapter<FranchiseAdapter.ListViewHolder>()
         private val binding = ItemListFranchiseBinding.bind(itemView)
         fun bind(data: Franchise) {
             with(binding) {
-//                Glide.with(itemView.context)
-//                    .load(data.image)
-//                    .into(ivItemImage)
+                Glide.with(itemView.context)
+                    .load(data.image)
+                    .into(ivItemImage)
                 tvItemTitle.text = data.name
                 tvItemSubtitle.text = data.slug
             }

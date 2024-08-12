@@ -18,6 +18,10 @@ class HomeViewModel @Inject constructor(private val useCase: AppUseCase) : ViewM
         clientID, token,
     ).asLiveData()
 
+    fun getScreenshot(clientID: String, token: String, gamesID: String) = useCase.getScreenshot(
+        clientID, token, gamesID,
+    ).asLiveData()
+
     fun removeToken() = useCase.setToken("")
     fun getToken() = useCase.getToken().asLiveData()
 }

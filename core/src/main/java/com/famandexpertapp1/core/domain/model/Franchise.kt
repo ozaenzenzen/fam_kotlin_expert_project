@@ -13,5 +13,6 @@ data class Franchise(
     val createdAt: Long,
     val slug: String,
     val url: String,
+    var image: String?,
     var isFavorite: Boolean,
 )

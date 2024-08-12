@@ -16,6 +16,7 @@ import com.example.famandexpertapp1.databinding.ActivityHomeBinding
 import com.example.famandexpertapp1.detail.DetailActivity
 import com.example.famandexpertapp1.favorite.FavoriteActivity
 import com.example.famandexpertapp1.welcome.MainActivity
+import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.ui.FranchiseAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,24 +56,66 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getDataList() {
+        var newListData: List<Franchise>?
         homeViewModel.getToken().observe(this) { valueToken ->
             homeViewModel.dataList(
                 clientID = ACCESS_CLIENT_ID,
                 token = "Bearer $valueToken",
             ).observe(this) { franchise ->
-                Log.d("home view", "${franchise}")
+                Log.d("home view", "$franchise")
                 if (franchise != null) {
                     when (franchise) {
                         is com.famandexpertapp1.core.data.Resource.Loading -> binding.viewLoading.visibility =
                             View.VISIBLE
 
                         is com.famandexpertapp1.core.data.Resource.Success -> {
-                            binding.viewLoading.visibility = View.GONE
+                            newListData = franchise.data
+                            newListData?.forEach { it ->
+                                homeViewModel.getScreenshot(
+                                    clientID = ACCESS_CLIENT_ID,
+                                    token = "Bearer $valueToken",
+                                    gamesID = it.games[0].toString()
+                                ).observe(this) { screenshotData ->
+                                    if (screenshotData != null) {
+                                        Log.d("TESTER screenshotData", "${screenshotData}")
+                                        when (screenshotData) {
+                                            is com.famandexpertapp1.core.data.Resource.Loading -> binding.viewLoading.visibility =
+                                                View.VISIBLE
 
-                            binding.tvNotFoundError.visibility = View.GONE
-                            binding.ivNotFoundError.visibility = View.GONE
+                                            is com.famandexpertapp1.core.data.Resource.Success -> {
+                                                newListData?.forEach { data ->
+                                                    Log.d("TESTER", "${screenshotData.data}")
+                                                    if (screenshotData.data.isNullOrEmpty()) {
+                                                        data.image =
+                                                            "https://avatars.githubusercontent.com/u/14101776?s=280&v=4"
+                                                    } else {
+                                                        data.image =
+                                                            "https://${screenshotData.data!![0].imageId.toString()}"
+                                                    }
+                                                }
 
-                            franchiseAdapter.setData(franchise.data)
+                                                binding.viewLoading.visibility = View.GONE
+
+                                                binding.tvNotFoundError.visibility = View.GONE
+                                                binding.ivNotFoundError.visibility = View.GONE
+
+//                                            franchiseAdapter.setData(franchise.data)
+                                                franchiseAdapter.setData(newListData)
+                                            }
+
+                                            is com.famandexpertapp1.core.data.Resource.Error -> {
+                                                binding.viewLoading.visibility = View.GONE
+
+                                                binding.tvNotFoundError.visibility = View.VISIBLE
+                                                binding.ivNotFoundError.visibility = View.VISIBLE
+
+                                                binding.tvNotFoundError.text =
+                                                    getString(R.string.something_wrong)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         is com.famandexpertapp1.core.data.Resource.Error -> {

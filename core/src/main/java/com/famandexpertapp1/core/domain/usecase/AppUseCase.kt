@@ -1,8 +1,10 @@
 package com.famandexpertapp1.core.domain.usecase
 
 import com.famandexpertapp1.core.data.Resource
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
+import com.famandexpertapp1.core.domain.model.Screenshot
 import kotlinx.coroutines.flow.Flow
 
 interface AppUseCase {
@@ -20,4 +22,10 @@ interface AppUseCase {
 
     fun getToken(): Flow<String>
     fun setToken(value: String)
+
+    fun getScreenshot(
+        clientID: String,
+        token: String,
+        gamesID: String,
+    ): Flow<Resource<List<Screenshot>>>
 }

@@ -36,6 +36,9 @@ data class FranchiseEntity (
     @ColumnInfo("url")
     val url: String,
 
+    @ColumnInfo("image")
+    val image: String? = null,
+
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,
 ) : Parcelable
