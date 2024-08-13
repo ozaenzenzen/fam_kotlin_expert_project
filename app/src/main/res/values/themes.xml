@@ -7,7 +7,7 @@
 
     <style name="Theme.FAMAndExpertApp1" parent="Base.Theme.FAMAndExpertApp1">
         <item name="android:actionBarStyle">@style/ToolbarTheme</item>
-        Ï<item name="colorPrimary">@color/dark_blue_200</item>
+        Ï<item name="colorPrimary">@color/dark_blue_700</item>
         <item name="colorPrimaryVariant">@color/dark_blue_700</item>
         <item name="actionBarTheme">@style/ActionBarStyle</item>
 <!--        <item name="android:tint">@color/white</item>-->
