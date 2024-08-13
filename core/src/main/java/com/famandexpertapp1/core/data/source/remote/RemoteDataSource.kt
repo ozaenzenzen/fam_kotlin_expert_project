@@ -17,38 +17,6 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-//    companion object {
-//        @Volatile
-//        private var instance: RemoteDataSource? = null
-//
-//        fun getInstance(service: ApiService): RemoteDataSource =
-//            instance ?: synchronized(this) {
-//                instance ?: RemoteDataSource(service)
-//            }
-//    }
-
-//    suspend fun generateToken(
-//        clientID: String,
-//        clientSecret: String,
-//    ): Flow<ApiResponse<GenerateTokenResponseModel>> {
-//        return flow {
-//            try {
-//                val response = apiService.generateToken(
-//                    clientID = clientID,
-//                    clientSecret = clientSecret,
-//                )
-//                if (response.tokenType != null) {
-//                    emit(ApiResponse.Success(response))
-//                } else {
-//                    emit(ApiResponse.Empty)
-//                }
-//            } catch (e: Exception) {
-//                emit(ApiResponse.Error(e.toString()))
-//                Log.e("generateToken", e.toString())
-//            }
-//        }.flowOn(Dispatchers.IO)
-//    }
-
     suspend fun getAllFranchise(
         clientID: String,
         token: String,

@@ -6,16 +6,11 @@ import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDatabase
 import com.famandexpertapp1.core.data.source.local.room.GamesDao
 import com.famandexpertapp1.core.data.source.local.room.ScreenshotDao
-//import com.famandexpertapp1.core.data.source.local.room.ScreenshotDatabase
-//import com.famandexpertapp1.core.data.source.local.room.GamesDao
-//import com.famandexpertapp1.core.data.source.local.room.GamesDatabase
-import com.famandexpertapp1.core.domain.model.Games
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

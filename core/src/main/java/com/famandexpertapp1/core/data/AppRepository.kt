@@ -126,7 +126,6 @@ class AppRepository @Inject constructor(
             override fun loadFromDB(): Flow<List<Screenshot>> {
                 return localDataSource.getScreenshotSingleData(gamesID)
                     .map {
-//                        Log.d("loadFromDB", "${it[0].url}")
                         DataMapper.mapScreenshotEntitiesToDomain(it)
                     }
             }
@@ -141,7 +140,6 @@ class AppRepository @Inject constructor(
 
             override suspend fun saveCallResult(data: List<ScreenshotResponseModelItem?>) {
                 val screenshotList = DataMapper.mapScreenshotResponsesToEntities(data)
-//                Log.d("saveCallResult", "${screenshotList}")
                 localDataSource.insertScreenshot(screenshotList)
             }
 
@@ -151,17 +149,4 @@ class AppRepository @Inject constructor(
 
         }.asFlow()
     }
-
-//    override fun getScreenshot(
-//        clientID: String,
-//        token: String,
-//        gamesID: String
-//    ): Flow<List<Screenshot>> {
-//        val response =  remoteDataSource.getScreenshot(
-//            clientID = clientID,
-//            token = token,
-//            gamesID = gamesID,
-//        )
-//        return response
-//    }
 }

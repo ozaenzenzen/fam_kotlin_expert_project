@@ -17,15 +17,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavoriteActivity : AppCompatActivity() {
-//    @Inject
-//    lateinit var factory: ViewModelFactory
-//
-//    private val favoriteViewModel: FavoriteViewModel by viewModels {
-//        factory
-//    }
-
-    //    private val favoriteViewModel: FavoriteViewModel by viewModels()
-
     @Inject
     lateinit var factory: ViewModelFactory
 

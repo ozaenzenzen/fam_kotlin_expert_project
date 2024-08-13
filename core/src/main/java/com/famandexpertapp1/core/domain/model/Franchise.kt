@@ -18,7 +18,6 @@ data class Franchise(
     var image: String?,
     var isFavorite: Boolean,
 ) : Parcelable {
-    // Constructor used for reading from a Parcel
     constructor(parcel: Parcel) : this(
         id = parcel.readInt(),
         updatedAt = parcel.readInt(),
@@ -35,8 +34,6 @@ data class Franchise(
     )
 
     companion object : Parceler<Franchise> {
-
-        // Write the object’s data to the passed-in Parcel
         override fun Franchise.write(parcel: Parcel, flags: Int) {
             parcel.writeInt(id)
             parcel.writeInt(updatedAt)

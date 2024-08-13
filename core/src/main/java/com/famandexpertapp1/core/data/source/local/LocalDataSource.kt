@@ -3,7 +3,6 @@ package com.famandexpertapp1.core.data.source.local
 import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
 import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.entity.ScreenshotEntity
-//import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
 import com.famandexpertapp1.core.data.source.local.room.GamesDao
 import com.famandexpertapp1.core.data.source.local.room.ScreenshotDao
@@ -15,23 +14,11 @@ import javax.inject.Singleton
 
 @Singleton
 class LocalDataSource @Inject constructor(
-//    private val franchiseDao: FranchiseDao,
     private val userDataPreferences: UserDataPreferences,
-//    @Named("franchiseDao") private val franchiseDao: FranchiseDao,
-//    @Named("screenshotDao") private val screenshotDao: ScreenshotDao,
     private val franchiseDao: FranchiseDao,
     private val screenshotDao: ScreenshotDao,
     private val gamesDao: GamesDao,
 ) {
-
-//    companion object {
-//        private var instance: LocalDataSource? = null
-//
-//        fun getInstance(tourismDao: TourismDao): LocalDataSource =
-//            instance ?: synchronized(this) {
-//                instance ?: LocalDataSource(tourismDao)
-//            }
-//    }
 
     fun getAllFranchise(): Flow<List<FranchiseEntity>> = franchiseDao.getAllFranchise()
 
@@ -65,10 +52,6 @@ class LocalDataSource @Inject constructor(
 
     suspend fun setToken(value: String) {
         userDataPreferences.setToken(value)
-    }
-
-    suspend fun getScreenshot() {
-        // This function does nothing
     }
 
     fun getAllScreenshot(): Flow<List<ScreenshotEntity>> = screenshotDao.getAllScreenshot()

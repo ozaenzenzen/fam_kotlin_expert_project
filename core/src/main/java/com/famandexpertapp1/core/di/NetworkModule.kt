@@ -34,14 +34,4 @@ class NetworkModule {
             .build()
         return retrofit.create(ApiService::class.java)
     }
-
-//    @Provides
-//    fun provideApiService(client: OkHttpClient, baseUrl: String?): ApiService {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(baseUrl ?: "https://api.igdb.com/v4/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .client(client)
-//            .build()
-//        return retrofit.create(ApiService::class.java)
-//    }
 }

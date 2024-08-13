@@ -4,7 +4,6 @@ import com.famandexpertapp1.core.data.source.local.entity.FranchiseEntity
 import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.local.entity.ScreenshotEntity
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
-//import com.famandexpertapp1.core.data.source.local.entity.GamesEntity
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise

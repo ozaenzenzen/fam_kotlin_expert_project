@@ -19,13 +19,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
-//    @Inject
-//    lateinit var factory: ViewModelFactory
-//
-//    private val detailViewModel: DetailViewModel by viewModels {
-//        factory
-//    }
-
     private val detailViewModel: DetailViewModel by viewModels()
 
     private lateinit var binding: ActivityDetailBinding
