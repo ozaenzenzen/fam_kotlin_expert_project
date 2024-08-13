@@ -11,7 +11,9 @@ import com.famandexpertapp1.core.data.source.local.userpref.UserDataPreferences
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Singleton
 
+@Singleton
 class LocalDataSource @Inject constructor(
 //    private val franchiseDao: FranchiseDao,
     private val userDataPreferences: UserDataPreferences,

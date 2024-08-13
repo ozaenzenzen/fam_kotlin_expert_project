@@ -18,7 +18,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AppRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
@@ -44,7 +46,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Franchise>?): Boolean =
-                false
+                data == null || data.isEmpty()
 
         }.asFlow()
     }

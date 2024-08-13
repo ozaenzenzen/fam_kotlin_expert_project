@@ -3,26 +3,19 @@ package com.example.famandexpertapp1.detail
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.famandexpertapp1.BuildConfig.ACCESS_CLIENT_ID
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityDetailBinding
-import com.example.famandexpertapp1.favorite.FavoriteViewModel
-import com.example.famandexpertapp1.welcome.MainViewModel
 import com.famandexpertapp1.core.data.Resource
-import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {

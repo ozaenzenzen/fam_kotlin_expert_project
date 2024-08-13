@@ -1,25 +1,21 @@
-package com.example.famandexpertapp1.favorite
+package com.famandexpertapp1.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.famandexpertapp1.R
-import com.example.famandexpertapp1.databinding.ActivityFavoriteBinding
 import com.example.famandexpertapp1.detail.DetailActivity
-import com.example.famandexpertapp1.home.HomeViewModel
+import com.example.famandexpertapp1.di.FavoriteModuleDependency
 import com.famandexpertapp1.core.ui.FranchiseAdapter
+import com.famandexpertapp1.favorite.databinding.ActivityFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
 //    @Inject
 //    lateinit var factory: ViewModelFactory
@@ -28,13 +24,32 @@ class FavoriteActivity : AppCompatActivity() {
 //        factory
 //    }
 
-    private val favoriteViewModel: FavoriteViewModel by viewModels()
+    //    private val favoriteViewModel: FavoriteViewModel by viewModels()
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        factory
+    }
 
     private lateinit var binding: ActivityFavoriteBinding
 
     private lateinit var franchiseAdapter: FranchiseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerFavoriteComponent.builder()
+            .context(this)
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    applicationContext,
+                    FavoriteModuleDependency::class.java
+                )
+            )
+            .build()
+            .inject(this)
+
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
@@ -71,7 +86,10 @@ class FavoriteActivity : AppCompatActivity() {
             val intent = Intent(this@FavoriteActivity, DetailActivity::class.java)
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} ID", selectedData.games[0].toString())
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} IMAGE", selectedData.image.toString())
-            intent.putExtra("${DetailActivity.EXTRA_DETAIL} FAVORITE", selectedData.isFavorite.toString())
+            intent.putExtra(
+                "${DetailActivity.EXTRA_DETAIL} FAVORITE",
+                selectedData.isFavorite.toString()
+            )
             intent.putExtra("dataFranchise", selectedData)
             startActivity(intent)
         }

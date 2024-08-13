@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.flowOn
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 //    companion object {
 //        @Volatile

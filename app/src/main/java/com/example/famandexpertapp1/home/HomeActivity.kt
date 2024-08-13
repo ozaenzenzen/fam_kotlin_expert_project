@@ -1,6 +1,7 @@
 package com.example.famandexpertapp1.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -14,12 +15,11 @@ import com.example.famandexpertapp1.BuildConfig.ACCESS_CLIENT_ID
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityHomeBinding
 import com.example.famandexpertapp1.detail.DetailActivity
-import com.example.famandexpertapp1.favorite.FavoriteActivity
+//import com.famandexpertapp1.favorite.FavoriteActivity
 import com.example.famandexpertapp1.welcome.MainActivity
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.ui.FranchiseAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -169,9 +169,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.favorites -> {
-                Intent(this@HomeActivity, FavoriteActivity::class.java).also {
-                    startActivity(it)
-                }
+                val uri = Uri.parse("franchisefavorite://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                Intent(this@HomeActivity, com.famandexpertapp1.favorite.FavoriteActivity::class.java).also {
+//                    startActivity(it)
+//                }
                 return true
             }
 
