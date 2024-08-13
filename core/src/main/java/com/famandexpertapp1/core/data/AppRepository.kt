@@ -3,14 +3,20 @@ package com.famandexpertapp1.core.data
 import com.famandexpertapp1.core.data.source.local.LocalDataSource
 import com.famandexpertapp1.core.data.source.remote.RemoteDataSource
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
+import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
+import com.famandexpertapp1.core.domain.model.Screenshot
 import com.famandexpertapp1.core.domain.repository.IAppRepository
 import com.famandexpertapp1.core.utils.AppExecutors
 import com.famandexpertapp1.core.utils.DataMapper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -38,7 +44,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Franchise>?): Boolean =
-                data == null || data.isEmpty()
+                false
 
         }.asFlow()
     }
@@ -55,8 +61,105 @@ class AppRepository @Inject constructor(
             .execute { localDataSource.setFavoriteFranchise(franchiseEntity, state) }
     }
 
-    override fun getDetailGames(): Flow<Resource<Games>> {
-        TODO("Not yet implemented")
+    override fun getDetailGames(
+        clientID: String,
+        token: String,
+        gamesID: String?,
+    ): Flow<Resource<List<Games>>> {
+        return object :
+            NetworkBoundResource<List<Games>, List<DetailGamesResponseModelItem?>>(
+                appExecutors
+            ) {
+            override fun loadFromDB(): Flow<List<Games>> {
+                return localDataSource.getGames(gamesID ?: "223112")
+                    .map {
+                        DataMapper.mapGamesEntitiesToDomain(it)
+                    }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<DetailGamesResponseModelItem?>>> {
+                return remoteDataSource.getDetailGames(clientID, token, gamesID)
+            }
+
+            override suspend fun saveCallResult(data: List<DetailGamesResponseModelItem?>) {
+                val gamesList = DataMapper.mapGamesResponsesToEntities(data)
+                localDataSource.insertGames(gamesList)
+            }
+
+            override fun shouldFetch(data: List<Games>?): Boolean =
+//                data == null || data.isEmpty()
+                true
+
+
+        }.asFlow()
     }
 
+    override fun getToken(): Flow<String> {
+        val dataToken = localDataSource.getToken().map { value ->
+            value.toString()
+        }
+        return dataToken
+    }
+
+    override fun setToken(value: String) {
+        appExecutors.diskIO()
+            .execute {
+                CoroutineScope(Dispatchers.IO).launch {
+                    localDataSource.setToken(value)
+                }
+//                runBlocking {
+//                    localDataSource.setToken(value)
+//                }
+            }
+    }
+
+    override fun getScreenshot(
+        clientID: String,
+        token: String,
+        gamesID: String,
+    ): Flow<Resource<List<Screenshot>>> {
+        return object : NetworkBoundResource<List<Screenshot>, List<ScreenshotResponseModelItem?>>(
+            appExecutors
+        ) {
+            override fun loadFromDB(): Flow<List<Screenshot>> {
+                return localDataSource.getScreenshotSingleData(gamesID)
+                    .map {
+//                        Log.d("loadFromDB", "${it[0].url}")
+                        DataMapper.mapScreenshotEntitiesToDomain(it)
+                    }
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ScreenshotResponseModelItem?>>> {
+                return remoteDataSource.getScreenshot(
+                    clientID = clientID,
+                    token = token,
+                    gamesID = gamesID,
+                )
+            }
+
+            override suspend fun saveCallResult(data: List<ScreenshotResponseModelItem?>) {
+                val screenshotList = DataMapper.mapScreenshotResponsesToEntities(data)
+//                Log.d("saveCallResult", "${screenshotList}")
+                localDataSource.insertScreenshot(screenshotList)
+            }
+
+            override fun shouldFetch(data: List<Screenshot>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+        }.asFlow()
+    }
+
+//    override fun getScreenshot(
+//        clientID: String,
+//        token: String,
+//        gamesID: String
+//    ): Flow<List<Screenshot>> {
+//        val response =  remoteDataSource.getScreenshot(
+//            clientID = clientID,
+//            token = token,
+//            gamesID = gamesID,
+//        )
+//        return response
+//    }
 }

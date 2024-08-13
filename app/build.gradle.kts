@@ -1,9 +1,16 @@
+import java.util.Properties
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").reader())
+val clientIDData: String = localProperties.getProperty("ACCESS_CLIENTID_LOCPROP")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    id("kotlin-kapt")
-    id("com.google.devtools.ksp")
+    id("kotlin-kapt")
+//    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 apply {
@@ -22,6 +29,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ACCESS_CLIENT_ID", "\"" + "$clientIDData" + "\"")
     }
 
     buildTypes {
@@ -41,24 +50,21 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
 
 dependencies {
     implementation(project(":core"))
-    // implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    //Dagger
-    implementation("com.google.dagger:dagger:2.29.1")
-    ksp("com.google.dagger:dagger-compiler:2.29.1")
 }

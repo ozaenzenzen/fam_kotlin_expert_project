@@ -1,9 +1,9 @@
 package com.example.famandexpertapp1
 
 import android.app.Application
-import com.example.famandexpertapp1.di.AppComponent
-import com.famandexpertapp1.core.di.CoreComponent
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 open class MyApplication : Application() {
 
 //    private val coreComponent: CoreComponent by lazy {

@@ -1,5 +1,6 @@
 package com.famandexpertapp1.core.data
 
+import android.util.Log
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
 import com.famandexpertapp1.core.utils.AppExecutors
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +19,10 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
             when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
                     saveCallResult(apiResponse.data)
-                    emitAll(loadFromDB().map { Resource.Success(it) })
+                    emitAll(loadFromDB().map {
+                        Log.d("NetworkBoundResource", "$it")
+                        Resource.Success(it)
+                    })
                 }
                 is ApiResponse.Empty -> {
                     emitAll(loadFromDB().map { Resource.Success(it) })

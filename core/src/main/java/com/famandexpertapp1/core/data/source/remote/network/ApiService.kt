@@ -4,6 +4,11 @@ import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseMo
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.GenerateTokenResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModel
+import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
+import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
+import okhttp3.RequestBody
+import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -16,17 +21,27 @@ interface ApiService {
         @Query("grant_type") grantType: String? = "client_credentials"
     ): GenerateTokenResponseModel
 
-    @POST("franchise")
+    @POST("franchises")
     suspend fun getAllFranchise(
         @Header("Client-ID") clientID: String,
         @Header("Authorization") token: String,
         @Header("Accept") accept: String? = "application/json",
-    ): ListFranchiseResponseModel
+        @Body body: RequestBody,
+    ): List<ListFranchiseResponseModelItem?>
+
+    @POST("screenshots")
+    suspend fun getScreenshot(
+        @Header("Client-ID") clientID: String,
+        @Header("Authorization") token: String,
+        @Header("Accept") accept: String? = "application/json",
+        @Body body: RequestBody,
+    ): List<ScreenshotResponseModelItem?>
 
     @POST("games")
     suspend fun getDetailGames(
         @Header("Client-ID") clientID: String,
         @Header("Authorization") token: String,
         @Header("Accept") accept: String? = "application/json",
-    ): DetailGamesResponseModel
+        @Body body: RequestBody,
+    ): List<DetailGamesResponseModelItem?>
 }
