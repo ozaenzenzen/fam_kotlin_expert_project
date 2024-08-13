@@ -8,8 +8,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val useCase: AppUseCase) : ViewModel() {
-    fun dataDetail(clientID: String, token: String) = useCase.getDetailGames(
+    fun dataDetail(clientID: String, token: String, gamesID: String?) = useCase.getDetailGames(
         clientID = clientID,
         token = token,
-    ).asLiveData()
+        gamesID = gamesID ?: null,
+    )
+
+    fun getToken() = useCase.getToken()
 }

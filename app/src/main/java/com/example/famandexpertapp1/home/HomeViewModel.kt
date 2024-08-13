@@ -9,11 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val useCase: AppUseCase) : ViewModel() {
-    fun dataDetail(clientID: String, token: String) = useCase.getDetailGames(
-        clientID = clientID,
-        token = token,
-    ).asLiveData()
-
     fun dataList(clientID: String, token: String) = useCase.getAllFranchise(
         clientID, token,
     ).asLiveData()

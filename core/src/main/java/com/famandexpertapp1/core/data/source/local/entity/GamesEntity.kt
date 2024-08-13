@@ -14,128 +14,221 @@ data class GamesEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo("id")
-    val id: Int,
+    var id: Int,
 
     @ColumnInfo("keywords")
-    val keywords: List<Int?>,
+    var keywords: List<Int?>,
 
     @ColumnInfo("rating")
-    val rating: Double,
+    var rating: Double,
 
     @ColumnInfo("similar_games")
-    val similarGames: List<Int?>,
+    var similarGames: List<Int?>,
 
     @ColumnInfo("created_at")
-    val createdAt: Int,
+    var createdAt: Int,
 
     @ColumnInfo("videos")
-    val videos: List<Int?>,
+    var videos: List<Int?>,
 
     @ColumnInfo("aggregated_rating_count")
-    val aggregatedRatingCount: Int,
+    var aggregatedRatingCount: Int,
 
     @ColumnInfo("alternative_names")
-    val alternativeNames: List<Int?>,
+    var alternativeNames: List<Int?>,
 
     @ColumnInfo("player_perspectives")
-    val playerPerspectives: List<Int?>,
+    var playerPerspectives: List<Int?>,
 
     @ColumnInfo("screenshots")
-    val screenshots: List<Int?>,
+    var screenshots: List<Int?>,
 
     @ColumnInfo("platforms")
-    val platforms: List<Int?>,
+    var platforms: List<Int?>,
 
     @ColumnInfo("cover")
-    val cover: Int,
+    var cover: Int,
 
     @ColumnInfo("themes")
-    val themes: List<Int?>,
+    var themes: List<Int?>,
 
     @ColumnInfo("age_ratings")
-    val ageRatings: List<Int?>,
+    var ageRatings: List<Int?>,
 
     @ColumnInfo("updated_at")
-    val updatedAt: Int,
+    var updatedAt: Int,
 
     @ColumnInfo("collections")
-    val collections: List<Int?>,
+    var collections: List<Int?>,
 
     @ColumnInfo("first_release_date")
-    val firstReleaseDate: Int,
+    var firstReleaseDate: Int,
 
     @ColumnInfo("genres")
-    val genres: List<Int?>,
+    var genres: List<Int?>,
 
     @ColumnInfo("release_dates")
-    val releaseDates: List<Int?>,
+    var releaseDates: List<Int?>,
 
     @ColumnInfo("storyline")
-    val storyline: String,
+    var storyline: String,
 
     @ColumnInfo("checksum")
-    val checksum: String,
+    var checksum: String,
 
     @ColumnInfo("total_rating")
-    val totalRating: Double,
+    var totalRating: Double,
 
     @ColumnInfo("parent_game")
-    val parentGame: Int,
+    var parentGame: Int,
 
     @ColumnInfo("slug")
-    val slug: String,
+    var slug: String,
 
     @ColumnInfo("hypes")
-    val hypes: Int,
+    var hypes: Int,
 
     @ColumnInfo("franchises")
-    val franchises: List<Int?>,
+    var franchises: List<Int?>,
 
     @ColumnInfo("summary")
-    val summary: String,
+    var summary: String,
 
     @ColumnInfo("game_modes")
-    val gameModes: List<Int?>,
+    var gameModes: List<Int?>,
 
     @ColumnInfo("external_games")
-    val externalGames: List<Int?>,
+    var externalGames: List<Int?>,
 
     @ColumnInfo("url")
-    val url: String,
+    var url: String,
 
     @ColumnInfo("rating_count")
-    val ratingCount: Int,
+    var ratingCount: Int,
 
     @ColumnInfo("tags")
-    val tags: List<Int?>,
+    var tags: List<Int?>,
 
     @ColumnInfo("language_supports")
-    val languageSupports: List<Int?>,
+    var languageSupports: List<Int?>,
 
     @ColumnInfo("artworks")
-    val artworks: List<Int?>,
+    var artworks: List<Int?>,
 
     @ColumnInfo("name")
-    val name: String,
+    var name: String,
 
     @ColumnInfo("total_rating_count")
-    val totalRatingCount: Int,
+    var totalRatingCount: Int,
 
     @ColumnInfo("aggregated_rating")
-    val aggregatedRating: Double,
+    var aggregatedRating: Double,
 
     @ColumnInfo("game_engines")
-    val gameEngines: List<Int?>,
+    var gameEngines: List<Int?>,
 
     @ColumnInfo("websites")
-    val websites: List<Int?>,
+    var websites: List<Int?>,
 
     @ColumnInfo("category")
-    val category: Int,
+    var category: Int,
 
     @ColumnInfo("involved_companies")
-    val involvedCompanies: List<Int?>,
+    var involvedCompanies: List<Int?>,
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,
 ) : Parcelable
+
+//@Parcelize
+//@Entity(tableName = "games_table")
+//data class GamesEntity(
+//    @PrimaryKey
+//    @NonNull
+//    @ColumnInfo("id")
+//    var id: Int,
+//
+//    @ColumnInfo("keywords")
+//    var keywords: List<Int?>?,
+//    @ColumnInfo("rating")
+//    var rating: Double?,
+//    @ColumnInfo("similar_games")
+//    var similarGames: List<Int?>?,
+//    @ColumnInfo("created_at")
+//    var createdAt: Int?,
+//    @ColumnInfo("videos")
+//    var videos: List<Int?>?,
+//    @ColumnInfo("aggregated_rating_count")
+//    var aggregatedRatingCount: Int?,
+//    @ColumnInfo("alternative_names")
+//    var alternativeNames: List<Int?>?,
+//    @ColumnInfo("player_perspectives")
+//    var playerPerspectives: List<Int?>?,
+//    @ColumnInfo("screenshots")
+//    var screenshots: List<Int?>?,
+//    @ColumnInfo("platforms")
+//    var platforms: List<Int?>?,
+//    @ColumnInfo("cover")
+//    var cover: Int?,
+//    @ColumnInfo("themes")
+//    var themes: List<Int?>?,
+//    @ColumnInfo("age_ratings")
+//    var ageRatings: List<Int?>?,
+//    @ColumnInfo("updated_at")
+//    var updatedAt: Int?,
+//    @ColumnInfo("collections")
+//    var collections: List<Int?>?,
+//    @ColumnInfo("first_release_date")
+//    var firstReleaseDate: Int?,
+//    @ColumnInfo("genres")
+//    var genres: List<Int?>?,
+//    @ColumnInfo("release_dates")
+//    var releaseDates: List<Int?>?,
+//    @ColumnInfo("storyline")
+//    var storyline: String?,
+//    @ColumnInfo("checksum")
+//    var checksum: String?,
+//    @ColumnInfo("total_rating")
+//    var totalRating: Double?,
+//    @ColumnInfo("parent_game")
+//    var parentGame: Int?,
+//    @ColumnInfo("slug")
+//    var slug: String?,
+//    @ColumnInfo("hypes")
+//    var hypes: Int?,
+//    @ColumnInfo("franchises")
+//    var franchises: List<Int?>?,
+//    @ColumnInfo("summary")
+//    var summary: String?,
+//    @ColumnInfo("game_modes")
+//    var gameModes: List<Int?>?,
+//    @ColumnInfo("external_games")
+//    var externalGames: List<Int?>?,
+//    @ColumnInfo("url")
+//    var url: String?,
+//    @ColumnInfo("rating_count")
+//    var ratingCount: Int?,
+//    @ColumnInfo("tags")
+//    var tags: List<Int?>?,
+//    @ColumnInfo("language_supports")
+//    var languageSupports: List<Int?>?,
+//    @ColumnInfo("artworks")
+//    var artworks: List<Int?>?,
+//    @ColumnInfo("name")
+//    var name: String?,
+//    @ColumnInfo("total_rating_count")
+//    var totalRatingCount: Int?,
+//    @ColumnInfo("aggregated_rating")
+//    var aggregatedRating: Double?,
+//    @ColumnInfo("game_engines")
+//    var gameEngines: List<Int?>?,
+//    @ColumnInfo("websites")
+//    var websites: List<Int?>?,
+//    @ColumnInfo("category")
+//    var category: Int?,
+//    @ColumnInfo("involved_companies")
+//    var involvedCompanies: List<Int?>?,
+//
+//    @ColumnInfo(name = "isFavorite")
+//    var isFavorite: Boolean = false,
+//) : Parcelable

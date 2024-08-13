@@ -1,9 +1,12 @@
 package com.famandexpertapp1.core.domain.model
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Franchise(
     val id: Int,
     val updatedAt: Int,
@@ -15,4 +18,4 @@ data class Franchise(
     val url: String,
     var image: String?,
     var isFavorite: Boolean,
-)
+) : Parcelable

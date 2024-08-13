@@ -42,5 +42,6 @@ interface ApiService {
         @Header("Client-ID") clientID: String,
         @Header("Authorization") token: String,
         @Header("Accept") accept: String? = "application/json",
-    ): DetailGamesResponseModel
+        @Body body: RequestBody,
+    ): List<DetailGamesResponseModelItem?>
 }

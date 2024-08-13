@@ -5,7 +5,6 @@ import com.famandexpertapp1.core.data.source.remote.RemoteDataSource
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
 import com.famandexpertapp1.core.data.source.remote.remote.DetailGamesResponseModelItem
 import com.famandexpertapp1.core.data.source.remote.remote.ListFranchiseResponseModelItem
-import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
 import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModelItem
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
@@ -16,11 +15,8 @@ import com.famandexpertapp1.core.utils.DataMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -68,25 +64,31 @@ class AppRepository @Inject constructor(
     override fun getDetailGames(
         clientID: String,
         token: String,
+        gamesID: String?,
     ): Flow<Resource<List<Games>>> {
         return object :
             NetworkBoundResource<List<Games>, List<DetailGamesResponseModelItem?>>(
                 appExecutors
             ) {
             override fun loadFromDB(): Flow<List<Games>> {
-                TODO("Not yet implemented")
+                return localDataSource.getGames(gamesID ?: "223112")
+                    .map {
+                        DataMapper.mapGamesEntitiesToDomain(it)
+                    }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<DetailGamesResponseModelItem?>>> {
-                return remoteDataSource.getDetailGames(clientID, token)
+                return remoteDataSource.getDetailGames(clientID, token, gamesID)
             }
 
             override suspend fun saveCallResult(data: List<DetailGamesResponseModelItem?>) {
-                TODO("Not yet implemented")
+                val gamesList = DataMapper.mapGamesResponsesToEntities(data)
+                localDataSource.insertGames(gamesList)
             }
 
             override fun shouldFetch(data: List<Games>?): Boolean =
-                data == null || data.isEmpty()
+//                data == null || data.isEmpty()
+                true
 
 
         }.asFlow()
@@ -120,7 +122,7 @@ class AppRepository @Inject constructor(
             appExecutors
         ) {
             override fun loadFromDB(): Flow<List<Screenshot>> {
-                return localDataSource.getAllScreenshot()
+                return localDataSource.getScreenshotSingleData(gamesID)
                     .map {
 //                        Log.d("loadFromDB", "${it[0].url}")
                         DataMapper.mapScreenshotEntitiesToDomain(it)
@@ -142,7 +144,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Screenshot>?): Boolean {
-                return true
+                return data == null || data.isEmpty()
             }
 
         }.asFlow()

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDatabase
+import com.famandexpertapp1.core.data.source.local.room.GamesDao
 import com.famandexpertapp1.core.data.source.local.room.ScreenshotDao
 //import com.famandexpertapp1.core.data.source.local.room.ScreenshotDatabase
 //import com.famandexpertapp1.core.data.source.local.room.GamesDao
@@ -32,29 +33,9 @@ class DatabaseModule {
     fun provideFranchiseDao(database: FranchiseDatabase): FranchiseDao =
         database.franchiseDao()
 
-//    @Provides
-//    fun provideFranchiseDao(@Named("franchiseDao") database: FranchiseDatabase): FranchiseDao =
-//        database.franchiseDao()
-
-//    @Singleton
-//    @Provides
-//    fun provideDatabaseGames(context: Context): GamesDatabase =
-//        Room.databaseBuilder(
-//            context,
-//            GamesDatabase::class.java, "Games.db"
-//        ).fallbackToDestructiveMigration().build()
-//
-//    @Provides
-//    fun provideGamesDao(@Named("gamesDao") databaseGames: GamesDatabase): GamesDao =
-//        databaseGames.gamesDao()
-
-//    @Singleton
-//    @Provides
-//    fun provideDatabaseScreenshot(context: Context): ScreenshotDatabase =
-//        Room.databaseBuilder(
-//            context,
-//            ScreenshotDatabase::class.java, "Screenshot.db"
-//        ).fallbackToDestructiveMigration().build()
+    @Provides
+    fun provideGamesDao(database: FranchiseDatabase): GamesDao =
+        database.gamesDao()
 
     @Provides
     fun provideScreenshotDao(database: FranchiseDatabase): ScreenshotDao =
