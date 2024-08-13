@@ -19,6 +19,7 @@ import com.example.famandexpertapp1.welcome.MainActivity
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.ui.FranchiseAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -70,29 +71,65 @@ class HomeActivity : AppCompatActivity() {
 
                         is com.famandexpertapp1.core.data.Resource.Success -> {
                             newListData = franchise.data
-                            newListData?.forEach { it ->
+                            newListData?.forEachIndexed { index, it ->
+//                                Log.d("ID GAMES", "${it.games[0].toString()}")
+//                                var shuffleIDGames = it.games.shuffled()
+                                var randomInt: Int = 0
+                                if (it.games.isEmpty() || it.games.size == 1) {
+                                    randomInt = 0
+                                } else {
+                                    randomInt = Random.nextInt(1, it.games.size - 1)
+                                }
                                 homeViewModel.getScreenshot(
                                     clientID = ACCESS_CLIENT_ID,
                                     token = "Bearer $valueToken",
-                                    gamesID = it.games[0].toString()
+                                    gamesID = if (it.games.isEmpty()) "259229" else it.games[randomInt].toString()
                                 ).observe(this) { screenshotData ->
                                     if (screenshotData != null) {
-                                        Log.d("TESTER screenshotData", "${screenshotData}")
                                         when (screenshotData) {
                                             is com.famandexpertapp1.core.data.Resource.Loading -> binding.viewLoading.visibility =
                                                 View.VISIBLE
 
                                             is com.famandexpertapp1.core.data.Resource.Success -> {
-                                                newListData?.forEach { data ->
-                                                    Log.d("TESTER", "${screenshotData.data}")
-                                                    if (screenshotData.data.isNullOrEmpty()) {
-                                                        data.image =
-                                                            "https://avatars.githubusercontent.com/u/14101776?s=280&v=4"
+                                                Log.d("franchise", "${newListData!![index]}")
+                                                Log.d(
+                                                    "screenshot",
+                                                    "${screenshotData.data!![index]}"
+                                                )
+//                                                Log.d("newListData", "${newListData?.size}")
+//                                                Log.d(
+//                                                    "screenshotData",
+//                                                    "${screenshotData.data?.size}"
+//                                                )
+
+                                                if (screenshotData.data!!.isEmpty()) {
+                                                    newListData!![index].image =
+                                                        "https://avatars.githubusercontent.com/u/14101776?s=280&v=4"
+                                                } else {
+                                                    var randomz: Int = 0
+                                                    if (screenshotData.data!!.isEmpty() || screenshotData.data!!.size == 1) {
+                                                        randomz = 0
                                                     } else {
-                                                        data.image =
-                                                            "https://${screenshotData.data!![0].imageId.toString()}"
+                                                        randomz = Random.nextInt(
+                                                            1,
+                                                            screenshotData.data!!.size
+                                                        )
                                                     }
+                                                    newListData!![index].image =
+                                                        "https:${screenshotData.data!![randomz].url.toString()}"
+//                                                    newListData!![index].image = "https:${screenshotData.data!![0].url.toString()}"
                                                 }
+//                                                newListData?.forEach { data ->
+//                                                    if (screenshotData.data.isNullOrEmpty()) {
+//                                                        data.image =
+//                                                            "https://avatars.githubusercontent.com/u/14101776?s=280&v=4"
+//                                                    } else {
+//                                                        data.image =
+//                                                            "https:${screenshotData.data!![0].url.toString()}"
+//                                                    }
+//                                                }
+
+//                                                Log.d("TESTER", "${newListData}")
 
                                                 binding.viewLoading.visibility = View.GONE
 

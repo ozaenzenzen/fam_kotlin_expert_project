@@ -37,7 +37,7 @@ data class FranchiseEntity (
     val url: String,
 
     @ColumnInfo("image")
-    val image: String? = null,
+    var image: String? = null,
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false,

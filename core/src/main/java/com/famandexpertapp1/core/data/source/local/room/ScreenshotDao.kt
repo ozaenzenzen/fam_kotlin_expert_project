@@ -14,6 +14,6 @@ interface ScreenshotDao {
     @Query("SELECT * FROM screenshot_table")
     fun getAllScreenshot(): Flow<List<ScreenshotEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertScreenshot(screenshot: List<ScreenshotEntity>)
 }

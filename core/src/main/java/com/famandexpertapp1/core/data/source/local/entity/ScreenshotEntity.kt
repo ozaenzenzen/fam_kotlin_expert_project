@@ -26,10 +26,10 @@ data class ScreenshotEntity(
     val id: Int,
 
     @ColumnInfo("image_id")
-    val imageId: String,
+    var imageId: String,
 
     @ColumnInfo("url")
-    val url: String,
+    var url: String,
 
     @ColumnInfo("height")
     val height: Int,

@@ -121,7 +121,10 @@ class AppRepository @Inject constructor(
         ) {
             override fun loadFromDB(): Flow<List<Screenshot>> {
                 return localDataSource.getAllScreenshot()
-                    .map { DataMapper.mapScreenshotEntitiesToDomain(it) }
+                    .map {
+//                        Log.d("loadFromDB", "${it[0].url}")
+                        DataMapper.mapScreenshotEntitiesToDomain(it)
+                    }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ScreenshotResponseModelItem?>>> {
@@ -134,6 +137,7 @@ class AppRepository @Inject constructor(
 
             override suspend fun saveCallResult(data: List<ScreenshotResponseModelItem?>) {
                 val screenshotList = DataMapper.mapScreenshotResponsesToEntities(data)
+//                Log.d("saveCallResult", "${screenshotList}")
                 localDataSource.insertScreenshot(screenshotList)
             }
 
