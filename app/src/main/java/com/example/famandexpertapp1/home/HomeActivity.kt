@@ -44,17 +44,22 @@ class HomeActivity : AppCompatActivity() {
 
         setToolbar("Home Page")
         setupAdapter()
-        getDataList()
+        if (savedInstanceState == null) {
+            getDataList()
+        }
     }
 
     private fun setupAdapter() {
         franchiseAdapter = FranchiseAdapter()
         franchiseAdapter.onItemClick = { selectedData ->
-            Log.d("onItemClick","selectedData ${selectedData}")
+            Log.d("onItemClick", "selectedData ${selectedData}")
             val intent = Intent(this@HomeActivity, DetailActivity::class.java)
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} ID", selectedData.games[0].toString())
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} IMAGE", selectedData.image.toString())
-            intent.putExtra("${DetailActivity.EXTRA_DETAIL} FAVORITE", selectedData.isFavorite.toString())
+            intent.putExtra(
+                "${DetailActivity.EXTRA_DETAIL} FAVORITE",
+                selectedData.isFavorite.toString()
+            )
             intent.putExtra("dataFranchise", selectedData)
             startActivity(intent)
         }
@@ -91,7 +96,8 @@ class HomeActivity : AppCompatActivity() {
                                                     newListData!![index].image =
                                                         "https://avatars.githubusercontent.com/u/14101776?s=280&v=4"
                                                 } else {
-                                                    newListData!![index].image = "https:${screenshotData.data!![0].url.toString()}"
+                                                    newListData!![index].image =
+                                                        "https:${screenshotData.data!![0].url.toString()}"
                                                 }
                                                 binding.viewLoading.visibility = View.GONE
 
