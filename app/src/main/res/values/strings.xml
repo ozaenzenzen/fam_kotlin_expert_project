@@ -17,6 +17,7 @@
     <string name="dummy_date" translatable="false">April 6, 2022</string>
     <string name="story_s_illustration">Story\'s illustration</string>
     <string name="favorite">Like this?</string>
+    <string name="title_favorite">Favorite</string>
 
     //Activity Favorite
 </resources>
