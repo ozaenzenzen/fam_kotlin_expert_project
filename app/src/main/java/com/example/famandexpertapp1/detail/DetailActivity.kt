@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -38,10 +39,11 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var detailGamesData: List<Games>
 
-//    private var idGames: String? = null
-
     private var idGames: String? = null
     private var imageUrl: String? = null
+    private var isFavorite: Boolean? = false
+
+    private var detailFranchise: Franchise? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +51,43 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        idGames = intent.extras?.get("${EXTRA_DETAIL} ID") as String
-        imageUrl = intent.extras?.get("${EXTRA_DETAIL} IMAGE") as String
+        idGames = intent.getStringExtra("$EXTRA_DETAIL ID")
+        imageUrl = intent.getStringExtra("$EXTRA_DETAIL IMAGE")
+        isFavorite = intent.getBooleanExtra("$EXTRA_DETAIL FAVORITE", false)
+
+        detailFranchise = intent.getParcelableExtra<Franchise>("dataFranchise")
 
         setToolbar("Detail Page")
         getDetailData()
+        setFavoriteAction()
+    }
+
+    private fun setFavoriteAction() {
+        var statusFavorite = detailFranchise?.isFavorite
+        setStatusFavorite(statusFavorite!!)
+        binding.fabFavorite.setOnClickListener {
+            statusFavorite = !statusFavorite!!
+            detailViewModel.setFavoriteFranchise(detailFranchise!!, statusFavorite!!)
+            setStatusFavorite(statusFavorite!!)
+        }
+    }
+
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if (statusFavorite) {
+            binding.fabFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_love_filled_24
+                )
+            )
+        } else {
+            binding.fabFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_love_outlined_24
+                )
+            )
+        }
     }
 
     private fun getDetailData() {

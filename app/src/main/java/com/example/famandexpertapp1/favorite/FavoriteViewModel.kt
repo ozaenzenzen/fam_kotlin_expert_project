@@ -7,6 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(useCase: AppUseCase) : ViewModel() {
-    val data = useCase.getFavoriteFranchise().asLiveData()
+class FavoriteViewModel @Inject constructor(private val useCase: AppUseCase) : ViewModel() {
+    fun getListFavoriteFranchise() = useCase.getFavoriteFranchise()
 }

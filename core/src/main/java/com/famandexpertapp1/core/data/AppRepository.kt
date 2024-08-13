@@ -44,7 +44,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Franchise>?): Boolean =
-                data == null || data.isEmpty()
+                false
 
         }.asFlow()
     }

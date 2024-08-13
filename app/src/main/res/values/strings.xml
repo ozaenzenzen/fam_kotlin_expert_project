@@ -16,4 +16,7 @@
     <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
     <string name="dummy_date" translatable="false">April 6, 2022</string>
     <string name="story_s_illustration">Story\'s illustration</string>
+    <string name="favorite">Like this?</string>
+
+    //Activity Favorite
 </resources>
