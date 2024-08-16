@@ -1,6 +1,7 @@
 package com.famandexpertapp1.core.di
 
 import android.content.Context
+
 import androidx.room.Room
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDao
 import com.famandexpertapp1.core.data.source.local.room.FranchiseDatabase
@@ -11,6 +12,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import javax.inject.Singleton
 
 @Module
@@ -18,11 +21,19 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideDatabaseFranchise(@ApplicationContext context: Context): FranchiseDatabase =
-        Room.databaseBuilder(
+    fun provideDatabaseFranchise(@ApplicationContext context: Context): FranchiseDatabase {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("famandroidexpert".toCharArray())
+        val factory = SupportFactory(passphrase)
+        val create = Room.databaseBuilder(
             context,
             FranchiseDatabase::class.java, "Franchise.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
+
+        return create
+    }
+
 
     @Provides
     fun provideFranchiseDao(database: FranchiseDatabase): FranchiseDao =
