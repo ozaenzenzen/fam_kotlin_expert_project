@@ -15,7 +15,7 @@ jobs:
           command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
-          working_directory: ~/project/FAMAndExpertApp1
+          working_directory: ~/project
           command: ./gradlew androidDependencies
       - save_cache:
           key: 'android-orb-v1-{{ epoch }}'
