@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import java.util.Properties
 
 val localProperties = Properties()
@@ -29,7 +31,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "ACCESS_CLIENT_ID", "\"" + "$clientIDData" + "\"")
+        buildConfigField("String", "ACCESS_CLIENT_ID", "\"" + clientIDData + "\"")
     }
 
     buildTypes {

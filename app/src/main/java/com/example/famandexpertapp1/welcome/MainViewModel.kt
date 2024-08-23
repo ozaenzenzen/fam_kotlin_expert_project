@@ -1,7 +1,6 @@
 package com.example.famandexpertapp1.welcome
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.famandexpertapp1.core.BuildConfig.ACCESS_TOKEN
 import com.famandexpertapp1.core.domain.usecase.AppUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -11,7 +11,6 @@ import com.example.famandexpertapp1.detail.DetailActivity
 import com.example.famandexpertapp1.di.FavoriteModuleDependency
 import com.famandexpertapp1.core.ui.FranchiseAdapter
 import com.famandexpertapp1.favorite.databinding.ActivityFavoriteBinding
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,7 +45,7 @@ class FavoriteActivity : AppCompatActivity() {
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setToolbar("Favorite Page")
+        setToolbar(getString(R.string.title_favorite_page))
         setupAdapter()
         getListFavoriteFranchise()
     }

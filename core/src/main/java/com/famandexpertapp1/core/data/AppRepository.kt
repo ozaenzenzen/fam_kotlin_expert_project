@@ -1,5 +1,6 @@
 package com.famandexpertapp1.core.data
 
+import android.util.Log
 import com.famandexpertapp1.core.data.source.local.LocalDataSource
 import com.famandexpertapp1.core.data.source.remote.RemoteDataSource
 import com.famandexpertapp1.core.data.source.remote.network.ApiResponse
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("SameReturnValue")
 @Singleton
 class AppRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -46,7 +48,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Franchise>?): Boolean =
-                data == null || data.isEmpty()
+                data.isNullOrEmpty()
 
         }.asFlow()
     }
@@ -88,11 +90,10 @@ class AppRepository @Inject constructor(
                 localDataSource.insertGames(gamesList)
             }
 
-            override fun shouldFetch(data: List<Games>?): Boolean =
-//                data == null || data.isEmpty()
-                true
-
-
+            override fun shouldFetch(data: List<Games>?): Boolean {
+                Log.d("ShouldFetch1", "${data.isNullOrEmpty()}")
+                return true
+            }
         }.asFlow()
     }
 
@@ -144,7 +145,7 @@ class AppRepository @Inject constructor(
             }
 
             override fun shouldFetch(data: List<Screenshot>?): Boolean {
-                return data == null || data.isEmpty()
+                return data.isNullOrEmpty()
             }
 
         }.asFlow()

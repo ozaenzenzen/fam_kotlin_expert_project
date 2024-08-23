@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,10 +23,8 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
     ): Flow<ApiResponse<List<ListFranchiseResponseModelItem?>>> {
         return flow {
             try {
-                val reqBody = RequestBody.create(
-                    "text/plain".toMediaTypeOrNull(),
-                    "fields checksum,created_at,games,name,slug,updated_at,url;",
-                )
+                val reqBody =
+                    "fields checksum,created_at,games,name,slug,updated_at,url;".toRequestBody("text/plain".toMediaTypeOrNull())
                 val response = apiService.getAllFranchise(
                     clientID,
                     token,
@@ -54,14 +52,10 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         return flow {
             try {
                 val reqBody = if (gamesID == null) {
-                    RequestBody.create(
-                        "text/plain".toMediaTypeOrNull(),
-                        "fields checksum,created_at,games,name,slug,updated_at,url;",
-                    )
+                    "fields checksum,created_at,games,name,slug,updated_at,url;".toRequestBody("text/plain".toMediaTypeOrNull())
                 } else {
-                    RequestBody.create(
-                        "text/plain".toMediaTypeOrNull(),
-                        "fields alpha_channel,animated,checksum,game,height,image_id,url,width; where id = $gamesID;",
+                    "fields alpha_channel,animated,checksum,game,height,image_id,url,width; where id = $gamesID;".toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
                     )
                 }
                 val response = apiService.getScreenshot(clientID, token, body = reqBody)
@@ -85,14 +79,12 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         return flow {
             try {
                 val reqBody = if (gamesID == null) {
-                    RequestBody.create(
-                        "text/plain".toMediaTypeOrNull(),
-                        "fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,collections,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_localizations,game_modes,genres,hypes,involved_companies,keywords,language_supports,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites;",
+                    "fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,collections,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_localizations,game_modes,genres,hypes,involved_companies,keywords,language_supports,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites;".toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
                     )
                 } else {
-                    RequestBody.create(
-                        "text/plain".toMediaTypeOrNull(),
-                        "fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,collections,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_localizations,game_modes,genres,hypes,involved_companies,keywords,language_supports,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites; where id = $gamesID;",
+                    "fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,collections,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_localizations,game_modes,genres,hypes,involved_companies,keywords,language_supports,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites; where id = $gamesID;".toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
                     )
                 }
                 val response = apiService.getDetailGames(clientID, token, body = reqBody)

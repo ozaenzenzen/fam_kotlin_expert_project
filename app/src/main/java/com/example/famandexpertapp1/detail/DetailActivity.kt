@@ -1,3 +1,5 @@
+@file:Suppress("KotlinConstantConditions")
+
 package com.example.famandexpertapp1.detail
 
 import android.os.Bundle
@@ -41,9 +43,9 @@ class DetailActivity : AppCompatActivity() {
         imageUrl = intent.getStringExtra("$EXTRA_DETAIL IMAGE")
         isFavorite = intent.getBooleanExtra("$EXTRA_DETAIL FAVORITE", false)
 
-        detailFranchise = intent.getParcelableExtra<Franchise>("dataFranchise")
+        detailFranchise = intent.getParcelableExtra("dataFranchise")
 
-        setToolbar("Detail Page")
+        setToolbar(getString(R.string.title_detail_page))
         getDetailData()
         setFavoriteAction()
     }
@@ -97,8 +99,8 @@ class DetailActivity : AppCompatActivity() {
                                 binding.tvNotFoundError.visibility = View.GONE
                                 binding.ivNotFoundError.visibility = View.GONE
 
-                                Log.d("idGames1", "${idGames}")
-                                Log.d("outputs1", "${dataDetail.data!![0].name}")
+                                Log.d("idGames1", "$idGames")
+                                Log.d("outputs1", dataDetail.data!![0].name)
                                 Log.d("outputs2", "${dataDetail.data!![0].id}")
 
                                 detailGamesData = dataDetail.data!!

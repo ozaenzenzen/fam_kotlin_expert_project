@@ -1,7 +1,6 @@
 package com.famandexpertapp1.core.data.source.local.entity
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,7 +10,6 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "franchise_table")
 data class FranchiseEntity (
     @PrimaryKey
-    @NonNull
     @ColumnInfo("id")
     val id: Int,
 

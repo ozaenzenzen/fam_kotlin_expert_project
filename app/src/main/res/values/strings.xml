@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FAMAndExpertApp1</string>
+    <string name="app_name">FAMAndExpertApp</string>
 
     //Activity Main
     <string name="title_welcome_page">Selamat datang di Game Blog!</string>
@@ -10,14 +10,19 @@
     <string name="no_data">No data</string>
     <string name="stories_not_found_error">Stories not found</string>
     <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="title_home_page">Home Page</string>
 
     //Activity Detail
     <string name="dummy_name" translatable="false">Test Item Data</string>
-    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsu....</string>
-    <string name="dummy_date" translatable="false">April 6, 2022</string>
-    <string name="story_s_illustration">Story\'s illustration</string>
+    <string name="dummy_description" translatable="false">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem Ipsum....</string>
     <string name="favorite">Like this?</string>
     <string name="title_favorite">Favorite</string>
+    <string name="desc_iv_detail_photo">Description Image View</string>
+    <string name="title_detail_page">Detail Page</string>
 
     //Activity Favorite
+    <string name="title_favorite_page">Favorite Page</string>
+
+    //Text
+    <string name="title_logout">Logout</string>
 </resources>

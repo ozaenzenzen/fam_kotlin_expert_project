@@ -13,7 +13,7 @@ import com.famandexpertapp1.core.domain.model.Screenshot
 object DataMapper {
     fun mapGamesResponsesToEntities(input: List<DetailGamesResponseModelItem?>): List<GamesEntity> {
         val gamesList = ArrayList<GamesEntity>()
-        input.map { it ->
+        input.map {
             val games = GamesEntity(
                 keywords = it?.keywords ?: emptyList(),
                 rating = it?.rating ?: 0.0,
@@ -37,25 +37,25 @@ object DataMapper {
                 checksum = it?.checksum ?: "",
                 totalRating = it?.totalRating ?: 0.0,
                 id = it?.id!!,
-                parentGame = it?.parentGame ?: 0,
-                slug = it?.slug ?: "",
-                hypes = it?.hypes ?: 0,
-                franchises = it?.franchises ?: emptyList(),
-                summary = it?.summary ?: "",
-                gameModes = it?.gameModes ?: emptyList(),
-                externalGames = it?.externalGames ?: emptyList(),
-                url = it?.url ?: "",
-                ratingCount = it?.ratingCount ?: 0,
-                tags = it?.tags ?: emptyList(),
-                languageSupports = it?.languageSupports ?: emptyList(),
-                artworks = it?.artworks ?: emptyList(),
-                name = it?.name ?: "",
-                totalRatingCount = it?.totalRatingCount ?: 0,
-                aggregatedRating = it?.aggregatedRating ?: 0.0,
-                gameEngines = it?.gameEngines ?: emptyList(),
-                websites = it?.websites ?: emptyList(),
-                category = it?.category ?: 0,
-                involvedCompanies = it?.involvedCompanies ?: emptyList(),
+                parentGame = it.parentGame ?: 0,
+                slug = it.slug ?: "",
+                hypes = it.hypes ?: 0,
+                franchises = it.franchises ?: emptyList(),
+                summary = it.summary ?: "",
+                gameModes = it.gameModes ?: emptyList(),
+                externalGames = it.externalGames ?: emptyList(),
+                url = it.url ?: "",
+                ratingCount = it.ratingCount ?: 0,
+                tags = it.tags ?: emptyList(),
+                languageSupports = it.languageSupports ?: emptyList(),
+                artworks = it.artworks ?: emptyList(),
+                name = it.name ?: "",
+                totalRatingCount = it.totalRatingCount ?: 0,
+                aggregatedRating = it.aggregatedRating ?: 0.0,
+                gameEngines = it.gameEngines ?: emptyList(),
+                websites = it.websites ?: emptyList(),
+                category = it.category ?: 0,
+                involvedCompanies = it.involvedCompanies ?: emptyList(),
                 isFavorite = false,
             )
             gamesList.add(games)
@@ -162,54 +162,9 @@ object DataMapper {
             )
         }
 
-    fun mapGamesDomainToEntity(input: Games) = GamesEntity(
-        keywords = input.keywords,
-        rating = input.rating,
-        similarGames = input.similarGames,
-        createdAt = input.createdAt,
-        videos = input.videos,
-        aggregatedRatingCount = input.aggregatedRatingCount,
-        alternativeNames = input.alternativeNames,
-        playerPerspectives = input.playerPerspectives,
-        screenshots = input.screenshots,
-        platforms = input.platforms,
-        cover = input.cover,
-        themes = input.themes,
-        ageRatings = input.ageRatings,
-        updatedAt = input.updatedAt,
-        collections = input.collections,
-        firstReleaseDate = input.firstReleaseDate,
-        genres = input.genres,
-        releaseDates = input.releaseDates,
-        storyline = input.storyline,
-        checksum = input.checksum,
-        totalRating = input.totalRating,
-        id = input.id!!,
-        parentGame = input.parentGame,
-        slug = input.slug,
-        hypes = input.hypes,
-        franchises = input.franchises,
-        summary = input.summary,
-        gameModes = input.gameModes,
-        externalGames = input.externalGames,
-        url = input.url,
-        ratingCount = input.ratingCount,
-        tags = input.tags,
-        languageSupports = input.languageSupports,
-        artworks = input.artworks,
-        name = input.name,
-        totalRatingCount = input.totalRatingCount,
-        aggregatedRating = input.aggregatedRating,
-        gameEngines = input.gameEngines,
-        websites = input.websites,
-        category = input.category,
-        involvedCompanies = input.involvedCompanies,
-        isFavorite = input.isFavorite ?: false,
-    )
-
     fun mapFranchiseResponsesToEntities(input: List<ListFranchiseResponseModelItem?>): List<FranchiseEntity> {
         val franchiseList = ArrayList<FranchiseEntity>()
-        input.map { it ->
+        input.map {
             val franchise = FranchiseEntity(
                 id = it?.id!!,
                 updatedAt = it.updatedAt!!,
@@ -257,7 +212,7 @@ object DataMapper {
 
     fun mapScreenshotResponsesToEntities(input: List<ScreenshotResponseModelItem?>): List<ScreenshotEntity> {
         val screenshotList = ArrayList<ScreenshotEntity>()
-        input.map { it ->
+        input.map {
             val screenshot = ScreenshotEntity(
                 game = it!!.game ?: 0,
                 width = it.width ?: 0,
@@ -289,15 +244,4 @@ object DataMapper {
             )
         }
 
-    fun mapScreenshotDomainToEntity(input: Screenshot) = ScreenshotEntity(
-        game = input.game!!,
-        width = input.width!!,
-        checksum = input.checksum!!,
-        id = input.id!!,
-        imageId = input.imageId!!,
-        url = input.url!!,
-        height = input.height!!,
-        alphaChannel = input.alphaChannel!!,
-        animated = input.animated!!,
-    )
 }

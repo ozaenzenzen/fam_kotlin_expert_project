@@ -9,7 +9,6 @@ import com.famandexpertapp1.core.data.source.local.room.ScreenshotDao
 import com.famandexpertapp1.core.data.source.local.userpref.UserDataPreferences
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -32,19 +31,10 @@ class LocalDataSource @Inject constructor(
         franchiseDao.updateFavoriteFranchise(franchise)
     }
 
-    fun getAllGames(): Flow<List<GamesEntity>> = gamesDao.getAllGames()
-
     fun getGames(gamesID: String): Flow<List<GamesEntity>> = gamesDao.getGames(gamesID)
-
-    fun getFavoriteGames(): Flow<List<GamesEntity>> = gamesDao.getFavoriteGames()
 
     suspend fun insertGames(gamesList: List<GamesEntity>) =
         gamesDao.insertGames(gamesList)
-
-    fun setFavoriteGames(games: GamesEntity, newState: Boolean) {
-        games.isFavorite = newState
-        gamesDao.updateFavoriteGames(games)
-    }
 
     fun getToken(): Flow<String?> {
         return userDataPreferences.getToken()
@@ -53,8 +43,6 @@ class LocalDataSource @Inject constructor(
     suspend fun setToken(value: String) {
         userDataPreferences.setToken(value)
     }
-
-    fun getAllScreenshot(): Flow<List<ScreenshotEntity>> = screenshotDao.getAllScreenshot()
 
     fun getScreenshotSingleData(gamesID: String): Flow<List<ScreenshotEntity>> = screenshotDao.getScreenshotSingleData(gamesID)
 

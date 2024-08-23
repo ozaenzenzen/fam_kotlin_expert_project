@@ -15,7 +15,6 @@ import com.example.famandexpertapp1.BuildConfig.ACCESS_CLIENT_ID
 import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityHomeBinding
 import com.example.famandexpertapp1.detail.DetailActivity
-//import com.famandexpertapp1.favorite.FavoriteActivity
 import com.example.famandexpertapp1.welcome.MainActivity
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.ui.FranchiseAdapter
@@ -23,13 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-//    @Inject
-//    lateinit var factory: ViewModelFactory
-//
-//    private val homeViewModel: HomeViewModel by viewModels {
-//        factory
-//    }
-
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: ActivityHomeBinding
@@ -42,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setToolbar("Home Page")
+        setToolbar(getString(R.string.title_home_page))
         setupAdapter()
         if (savedInstanceState == null) {
             getDataList()
@@ -52,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupAdapter() {
         franchiseAdapter = FranchiseAdapter()
         franchiseAdapter.onItemClick = { selectedData ->
-            Log.d("onItemClick", "selectedData ${selectedData}")
+            Log.d("onItemClick", "selectedData $selectedData")
             val intent = Intent(this@HomeActivity, DetailActivity::class.java)
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} ID", selectedData.games[0].toString())
             intent.putExtra("${DetailActivity.EXTRA_DETAIL} IMAGE", selectedData.image.toString())
@@ -171,9 +163,6 @@ class HomeActivity : AppCompatActivity() {
             R.id.favorites -> {
                 val uri = Uri.parse("franchisefavorite://favorite")
                 startActivity(Intent(Intent.ACTION_VIEW, uri))
-//                Intent(this@HomeActivity, com.famandexpertapp1.favorite.FavoriteActivity::class.java).also {
-//                    startActivity(it)
-//                }
                 return true
             }
 

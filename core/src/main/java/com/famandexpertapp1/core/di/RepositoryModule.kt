@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.famandexpertapp1.core.di
 
 import com.famandexpertapp1.core.data.AppRepository

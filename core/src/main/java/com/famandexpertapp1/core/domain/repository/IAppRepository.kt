@@ -1,7 +1,6 @@
 package com.famandexpertapp1.core.domain.repository
 
 import com.famandexpertapp1.core.data.Resource
-import com.famandexpertapp1.core.data.source.remote.remote.ScreenshotResponseModel
 import com.famandexpertapp1.core.domain.model.Franchise
 import com.famandexpertapp1.core.domain.model.Games
 import com.famandexpertapp1.core.domain.model.Screenshot

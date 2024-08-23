@@ -2,12 +2,6 @@ package com.famandexpertapp1.core.data.source.remote.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class ScreenshotResponseModel(
-
-	@field:SerializedName("ScreenshotResponseModel")
-	val screenshotResponseModel: List<ScreenshotResponseModelItem?>? = null
-)
-
 data class ScreenshotResponseModelItem(
 
 	@field:SerializedName("game")

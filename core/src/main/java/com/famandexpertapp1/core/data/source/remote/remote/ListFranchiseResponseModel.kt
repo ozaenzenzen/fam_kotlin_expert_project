@@ -2,11 +2,6 @@ package com.famandexpertapp1.core.data.source.remote.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class ListFranchiseResponseModel(
-    @field:SerializedName("ListFranchiseResponseModel")
-    val listFranchiseResponseModel: List<ListFranchiseResponseModelItem?>? = null
-)
-
 data class ListFranchiseResponseModelItem(
 
     @field:SerializedName("updated_at")

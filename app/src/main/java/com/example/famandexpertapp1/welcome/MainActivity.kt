@@ -6,30 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.famandexpertapp1.MyApplication
-import com.example.famandexpertapp1.R
 import com.example.famandexpertapp1.databinding.ActivityMainBinding
 import com.example.famandexpertapp1.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-//    @Inject
-//    lateinit var factory: ViewModelFactory
-
-//    private val mainViewModel: MainViewModel by viewModels {
-//        factory
-//    }
-
     private val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
@@ -57,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             launch {
                 mainViewModel.getToken().collect { token ->
                     Log.d("TOKEN_DATA", "data $token")
-                    if (token.isNullOrEmpty() || token == "null") {
+                    if (token.isEmpty() || token == "null") {
 //                        val intent = Intent(this@MainActivity, MainActivity::class.java)
 //                        startActivity(intent)
                     } else {

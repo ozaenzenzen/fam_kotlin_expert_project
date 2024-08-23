@@ -1,20 +1,20 @@
 package com.famandexpertapp1.core.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
 import com.famandexpertapp1.core.R
 import com.famandexpertapp1.core.databinding.ItemListFranchiseBinding
 import com.famandexpertapp1.core.domain.model.Franchise
-import com.famandexpertapp1.core.domain.model.Screenshot
 
 class FranchiseAdapter : RecyclerView.Adapter<FranchiseAdapter.ListViewHolder>() {
     private var listData = ArrayList<Franchise>()
     var onItemClick: ((Franchise) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newListData: List<Franchise>?) {
         if (newListData == null) return
         listData.clear()
